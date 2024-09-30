@@ -1,50 +1,75 @@
-# Welcome to your Expo app 👋
+# 🚀 NebulAI - Explore the Cosmos of Knowledge 🌌
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**NebulAI** es una aplicación futurista que te ayuda a estudiar de manera eficiente. Solo sube un archivo PDF, y nuestra avanzada inteligencia artificial generará un cuestionario de opción múltiple diseñado a tu medida. ¡Todo esto envuelto en una experiencia temática espacial que te hará sentir como un astronauta explorando el vasto universo del conocimiento!
 
-## Get started
+## 🌟 Funcionalidades principales
 
-1. Install dependencies
+- **📄 Carga de archivos PDF**: Sube tus documentos y NebulAI se encargará del resto.
+- **🤖 Generación de preguntas**: La IA analiza el contenido del PDF y genera preguntas de opción múltiple personalizadas.
+- **⭐ Dificultad ajustable**: Selecciona el nivel de dificultad de las preguntas (de 1 a 5 estrellas).
+- **🚀 Animaciones espaciales**: Disfruta de una interfaz dinámica llena de naves espaciales, estrellas y Nebu, tu astronauta guía personal.
+
+## 🛠️ Tecnologías
+
+- **React Native** (💻 Construcción de la app)
+- **Expo** (📲 Entorno de desarrollo rápido)
+- **Bun** (⚡ Ultra rápido manejo de dependencias y scripts)
+- **TypeScript** (🔒 Tipado estático para código robusto)
+
+## 🧑‍🚀 Cómo empezar
+
+Sigue estos simples pasos para desplegar **NebulAI** en tu dispositivo y comenzar a explorar el cosmos del aprendizaje.
+
+1. Clona el repositorio:
 
    ```bash
-   npm install
+   git clone https://github.com/tu-usuario/nebulai.git
+   cd nebulai
    ```
 
-2. Start the app
+2. Instala las dependencias con **Bun**:
 
    ```bash
-    npx expo start
+   bun install
    ```
 
-In the output, you'll find options to open the app in a
+3. Inicia el proyecto con **Expo**:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   expo start
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+4. Escanea el código QR con tu dispositivo móvil y disfruta de **NebulAI**.
 
-## Get a fresh project
+## 🚀 Contribuyendo
 
-When you're ready, run:
+¡Tu ayuda es bienvenida! Siéntete libre de abrir issues, proponer mejoras o reportar bugs. Nos encantaría que esta aventura espacial crezca con tu ayuda. Para contribuir, sigue estos pasos:
 
-```bash
-npm run reset-project
-```
+1. Haz un fork del proyecto.
+2. Crea una rama para tu feature (`git checkout -b feature/nebulosa-improvements`).
+3. Haz commit de tus cambios (`git commit -m 'Añadida nueva función de nebulosa'`).
+4. Empuja a la rama (`git push origin feature/nebulosa-improvements`).
+5. Abre un Pull Request.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🛰️ Roadmap
 
-## Learn more
+- [x] Carga de archivos PDF.
+- [x] Generación automática de preguntas.
+- [ ] Interacción avanzada con Nebu, el astronauta.
+- [ ] Modo nocturno interestelar.
+- [ ] Exportar cuestionarios generados a otros formatos.
 
-To learn more about developing your project with Expo, look at the following resources:
+## 👩‍🚀 Créditos
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Creado con 💙 por el equipo de **NebulAI**, un grupo de apasionados por la tecnología y el conocimiento que no teme explorar las fronteras del universo.
 
-## Join the community
+## 📡 Contacto
 
-Join our community of developers creating universal apps.
+Para preguntas, sugerencias o simplemente saludar, puedes contactarnos en:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- 🌌 [Página web](https://nebulai.space)
+- ✉️ Email: contacto@nebulai.space
+
+---
+
+**NebulAI** - "Explora el cosmos del conocimiento y más allá."
