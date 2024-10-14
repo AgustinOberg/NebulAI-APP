@@ -1,77 +1,89 @@
 import { router } from 'expo-router';
+import { MotiView } from 'moti';
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
-import AstronautWaving from '@/animations/components/astronaut-waving';
-import ScreenBackground from '@/components/shared/screen-background';
+import AnimatedStars from '@/components/shared/animated-stars';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
+import { getResults } from '@/utils/challenge.utils';
 
 const Results = () => {
   const { styles } = useStyles(stylesheet);
   const { answers, questions } = useAttempt();
-
-  const userCorrectAnswers = useMemo(() => {
-    return questions.filter((eachQuestion) => {
-      const correctOption = eachQuestion.options.find(
-        (option) => option.isCorrect,
-      );
-      return answers[eachQuestion._id] === correctOption?._id;
-    });
-  }, [answers, questions]);
-
   const results = useMemo(
-    () => ({
-      percentage: (
-        (userCorrectAnswers.length / questions.length) *
-        100
-      ).toFixed(0),
-      correctAnswers: userCorrectAnswers.length,
-      totalQuestions: questions.length,
-    }),
-    [userCorrectAnswers, questions],
+    () => getResults(questions, answers),
+    [questions, answers],
   );
 
   const goToHome = () => {
-    router.replace('/(app)/(challenge)/creation');
+    router.navigate('/(app)/(tabs)');
   };
 
   return (
-    <>
-      <ScreenBackground />
+    <View style={styles.screen}>
+      <AnimatedStars quantity={20} />
       <View style={styles.container}>
-        <View style={styles.animation}>
-          <AstronautWaving />
-        </View>
         <View style={styles.results}>
-          <Text size={16}>Tu resultado es...</Text>
-          <Text weight="900" size={60}>
-            {results.percentage}%
-          </Text>
-          <Text size={16} style={styles.description}>
-            Contestaste correctamente{' '}
-            <Text weight="800">{results.correctAnswers}</Text> de las{' '}
-            <Text weight="800">{results.totalQuestions}</Text> preguntas que te
-            hice.
-          </Text>
+          <MotiView
+            from={{ opacity: 0, translateY: -50 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ type: 'timing', duration: 500, delay: 200 }}
+          >
+            <Text size={16}>Tu resultado es...</Text>
+          </MotiView>
+          <MotiView
+            from={{ opacity: 0, translateY: -50, scale: 0.8 }}
+            animate={{ opacity: 1, translateY: 0, scale: 1.5 }}
+            transition={{ type: 'timing', duration: 500, delay: 500 * 3 }}
+          >
+            <Text weight="900" size={60}>
+              {results.percentage}%
+            </Text>
+          </MotiView>
+          <MotiView
+            from={{ opacity: 0, translateY: -50 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ type: 'timing', duration: 500, delay: 500 * 5 }}
+          >
+            <>
+              <Text size={16} style={styles.description}>
+                Contestaste correctamente{' '}
+                <Text weight="800">{results.correctAnswers}</Text> de las{' '}
+                <Text weight="800">{results.totalQuestions}</Text> preguntas.
+              </Text>
+            </>
+          </MotiView>
         </View>
       </View>
-      <View style={styles.footer}>
-        <Button variant="text" onPress={goToHome}>
-          Volver al inicio
+      <MotiView
+        style={styles.footer}
+        from={{ opacity: 0, translateY: 50 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ type: 'timing', duration: 500, delay: 500 * 5 }}
+      >
+        <Button variant="tertiary" onPress={goToHome}>
+          Ver respuestas
         </Button>
-      </View>
-    </>
+        <Button variant="text" onPress={goToHome}>
+          Finalizar
+        </Button>
+      </MotiView>
+    </View>
   );
 };
 
 export default Results;
 
 const stylesheet = createStyleSheet((theme, runtime) => ({
+  screen: {
+    backgroundColor: '#351357',
+    flex: 1,
+  },
   container: {
-    paddingTop: runtime.insets.top + 100,
+    paddingTop: runtime.insets.top + 200,
     paddingHorizontal: theme.sizes.screenPadding,
     flex: 1,
     alignItems: 'center',
@@ -90,6 +102,7 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     textAlign: 'center',
   },
   footer: {
+    zIndex: 999,
     width: '100%',
     marginBottom: runtime.insets.bottom + theme.sizes.footer,
     paddingHorizontal: theme.sizes.screenPadding,

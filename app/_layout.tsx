@@ -9,16 +9,23 @@ import { queryClient } from '@/config/query.config';
 import { useInit } from '@/hooks/useInit';
 
 export const unstable_settings = {
-  initialRouteName: '(app)/(challenge)',
+  initialRouteName: '(app)/(tabs)',
+};
+
+const App = () => {
+  useInit();
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(app)" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+    </Stack>
+  );
 };
 
 export default function RootLayout() {
-  useInit();
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
-      </Stack>
+      <App />
     </QueryClientProvider>
   );
 }

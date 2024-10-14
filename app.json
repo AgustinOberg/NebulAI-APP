@@ -30,10 +30,25 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.119729326913-3jtis94klm13tqjma8jhseeiromvfo23"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "639936ff-ffc0-470a-b07c-30e4bc4c5dbb"
+      }
+    },
+    "owner": "agustin.aguilera"
   }
 }

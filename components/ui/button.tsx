@@ -56,16 +56,28 @@ const stylesheet = createStyleSheet((theme) => ({
     width: '100%',
     height: 50,
     borderRadius: 12,
-    elevation: 2,
-    shadowColor: theme.colors.secondaryText,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+
     justifyContent: 'center',
     alignItems: 'center',
+    variants: {
+      variant: {
+        text: {
+          elevation: 0,
+          shadowOpacity: 0,
+          shadowRadius: 0,
+        },
+        default: {
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 2,
+          shadowColor: theme.colors.secondaryText,
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+        },
+      },
+    },
   },
   buttonChildren: {
     position: 'absolute',

@@ -1,4 +1,3 @@
-import { router } from 'expo-router';
 import { MotiView } from 'moti';
 import { FlatList, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
@@ -6,9 +5,8 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import AstronautWaving from '@/animations/components/astronaut-waving';
 import Space from '@/animations/components/space';
 import Text from '@/components/ui/text';
-import { useAttemptStore } from '@/data/state/attempt.store';
+import { useAttempt } from '@/hooks/attempt/useAttempt';
 import { useAutoChallengeCreation } from '@/hooks/useAutoChallengeCreation';
-import type { Question } from '@/types/challenge';
 
 const LOADING_TEXTS = [
   '🚀 Encendiendo los motores...',
@@ -18,13 +16,9 @@ const LOADING_TEXTS = [
 
 const PreparingScreen = () => {
   const { styles } = useStyles(stylesheet);
-  const setQuestionList = useAttemptStore((state) => state.setQuestions);
-  const startAttempt = (questions: Question[]) => {
-    setQuestionList(questions);
-    router.replace('/(challenge)/attempt');
-  };
+  const { startAttempt } = useAttempt();
 
-  useAutoChallengeCreation((c) => startAttempt(c.questions));
+  useAutoChallengeCreation((c) => startAttempt(c));
   return (
     <>
       <View style={styles.animationContainer}>

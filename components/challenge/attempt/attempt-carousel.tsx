@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Dimensions, FlatList, View } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import Button from '@/components/ui/button';
@@ -55,10 +55,15 @@ const AttemptCarousel = () => {
             </Button>
           </Animated.View>
         )}
-
-        <Button onPress={goToPreviousStep} variant="text">
-          Volver
-        </Button>
+        {currentQuestionIndex !== 0 ? (
+          <Animated.View entering={FadeInDown} exiting={FadeOutDown}>
+            <Button onPress={goToPreviousStep} variant="text">
+              Volver
+            </Button>
+          </Animated.View>
+        ) : (
+          <View style={styles.spacer} />
+        )}
       </View>
     </View>
   );
@@ -83,5 +88,9 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     marginBottom: runtime.insets.bottom + theme.sizes.footer,
     position: 'absolute',
     bottom: 0,
+  },
+  spacer: {
+    height: 50,
+    width: '100%',
   },
 }));

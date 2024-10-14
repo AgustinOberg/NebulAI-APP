@@ -35,7 +35,7 @@ const AttemptHeader = ({ step = 0, total = 7 }: Props) => {
         data={data}
         horizontal
         contentContainerStyle={styles.contentContainer}
-        renderItem={() => <View style={styles.step} />}
+        renderItem={() => <View style={styles.unscaledStep} />}
         keyExtractor={(item) => item.toString()}
       />
       <MotiView
@@ -68,7 +68,7 @@ const stylesheet = createStyleSheet((theme) => {
       paddingHorizontal: theme.sizes.screenPadding,
       position: 'relative',
     },
-    step: {
+    unscaledStep: {
       height: stepHeight,
       width: stepWidth,
       backgroundColor: '#ED5500',

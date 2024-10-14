@@ -1,6 +1,6 @@
 import type * as DocumentPicker from 'expo-document-picker';
 
-import { publicApi } from '@/config/api.config';
+import privateApi from '@/config/api.config';
 
 export const processDocument = async (
   document: DocumentPicker.DocumentPickerResult,
@@ -17,7 +17,7 @@ export const processDocument = async (
   };
   formData.append('file', pdfFile as any);
 
-  const { data } = await publicApi.post<{ content: string }>(
+  const { data } = await privateApi.post<{ content: string }>(
     '/document/process',
     formData,
     {

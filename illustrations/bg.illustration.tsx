@@ -3,6 +3,7 @@ import { memo } from 'react';
 import type { SvgProps } from 'react-native-svg';
 import Svg, { Circle, Path } from 'react-native-svg';
 
+//TODO: Skia + Reanimated
 const originalWidth = 1284;
 const originalHeight = 2708;
 const Illustration = (props: SvgProps) => (

@@ -17,3 +17,9 @@ export interface Option {
   _id: string;
   isCorrect: boolean;
 }
+export interface MinChallenge {
+  _id: string;
+  title: string;
+  description: string;
+  createdAt: string;
+}

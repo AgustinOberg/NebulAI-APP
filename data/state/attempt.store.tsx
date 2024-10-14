@@ -2,7 +2,7 @@ import type { StateCreator } from 'zustand';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-import type { Question } from '@/types/challenge';
+import type { Challenge, Question } from '@/types/challenge';
 
 export type Answer = {
   questionId: string;
@@ -12,12 +12,14 @@ export type Answer = {
 interface AttemptState {
   // Properties
   questions: Question[];
+  challengeId?: string;
   answers: {
     [questionId: string]: string;
   };
   // Methods
-  setQuestions: (questions: Question[]) => void;
+  setChallenge: (challenge: Challenge) => void;
   completeQuestion: (questionId: string, answerId: string) => void;
+  reset: () => void;
 }
 
 const storeApi: StateCreator<AttemptState, [['zustand/immer', never]]> = (
@@ -26,16 +28,24 @@ const storeApi: StateCreator<AttemptState, [['zustand/immer', never]]> = (
   // Properties
   questions: [],
   answers: {},
+  challengeId: undefined,
 
   // Methods
-  setQuestions: (questions) => {
+  setChallenge: (challenge) => {
     set((state) => {
-      state.questions = questions;
+      state.questions = challenge.questions;
+      state.challengeId = challenge._id;
     });
   },
   completeQuestion: (questionId, answerId) => {
     set((state) => {
       state.answers[questionId] = answerId;
+    });
+  },
+  reset: () => {
+    set((state) => {
+      state.questions = [];
+      state.answers = {};
     });
   },
 });

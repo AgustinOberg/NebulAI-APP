@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import AstronautWaving from '@/animations/components/astronaut-waving';
+import ChallengeHeader from '@/components/challenge/header';
 import ScreenBackground from '@/components/shared/screen-background';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
@@ -13,6 +14,7 @@ import { useProcessFile } from '@/hooks/useProcessFile';
 const TestScreen = () => {
   const { styles } = useStyles(stylesheet);
   const { selectFile } = useProcessFile();
+
   const handleSelect = async () => {
     await selectFile();
     router.push('/(app)/(challenge)/creation/choose-difficulty');
@@ -20,6 +22,7 @@ const TestScreen = () => {
   return (
     <>
       <ScreenBackground />
+      <ChallengeHeader />
       <View style={styles.screenContainer}>
         <View>
           <MotiView
@@ -66,7 +69,7 @@ const TestScreen = () => {
             </Button>
           </MotiView>
           <Text style={styles.text} size={13} color="disabled">
-            Solo se aceptan archivos con extensión .pdf
+            *Solo se aceptan archivos con extensión .pdf
           </Text>
         </View>
       </View>
