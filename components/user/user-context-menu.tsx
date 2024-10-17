@@ -35,7 +35,7 @@ const UserContextMenu = () => {
       >
         <DropdownMenuItem
           onSelect={logout}
-          key="fernando rojo"
+          key="user"
           placeholder={undefined}
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}

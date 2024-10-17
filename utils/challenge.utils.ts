@@ -25,3 +25,8 @@ export const getResults = (questions: Question[], answers: Answer) => {
     totalQuestions,
   };
 };
+
+export const isCorrectAnswer = (question: Question, answer: string) => {
+  const correctOption = question.options.find((option) => option.isCorrect);
+  return correctOption?._id === answer;
+};

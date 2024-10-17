@@ -41,6 +41,6 @@ export const useLoadFonts = () => {
   });
 
   return {
-    fontsLoaded,
+    isLoading: !fontsLoaded,
   };
 };

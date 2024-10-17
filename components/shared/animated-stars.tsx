@@ -41,7 +41,7 @@ const AnimatedStars = ({ quantity = 10, color = '#FFDD2D' }: Props) => {
             top: Math.random() * height,
             left: Math.random() * width,
             backgroundColor: color,
-            width: Math.random() * 5 + 1,
+            width: Math.random() * 3 + 1,
             aspectRatio: 1,
             borderRadius: 10,
           }}

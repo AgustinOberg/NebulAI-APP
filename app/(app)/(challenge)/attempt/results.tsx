@@ -8,18 +8,25 @@ import AnimatedStars from '@/components/shared/animated-stars';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
+import { useAttemptCarousel } from '@/hooks/attempt/useAttemptCarousel';
 import { getResults } from '@/utils/challenge.utils';
 
 const Results = () => {
   const { styles } = useStyles(stylesheet);
-  const { answers, questions } = useAttempt();
+  const { answers, questions, seeResults } = useAttempt();
+  const { reset: resetCarousel } = useAttemptCarousel();
   const results = useMemo(
     () => getResults(questions, answers),
     [questions, answers],
   );
 
   const goToHome = () => {
-    router.navigate('/(app)/(tabs)');
+    router.replace('/(app)/(tabs)');
+  };
+
+  const goToResponses = () => {
+    resetCarousel();
+    seeResults();
   };
 
   return (
@@ -64,7 +71,7 @@ const Results = () => {
         animate={{ opacity: 1, translateY: 0 }}
         transition={{ type: 'timing', duration: 500, delay: 500 * 5 }}
       >
-        <Button variant="tertiary" onPress={goToHome}>
+        <Button variant="tertiary" onPress={goToResponses}>
           Ver respuestas
         </Button>
         <Button variant="text" onPress={goToHome}>

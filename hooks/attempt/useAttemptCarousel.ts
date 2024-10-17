@@ -5,14 +5,14 @@ import { useAttemptState } from '@/data/state/attempt.context';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
 
 export const useAttemptCarousel = () => {
-  const { questions } = useAttempt();
+  const { questions, mode } = useAttempt();
 
   const { currentQuestionIndex, setCurrentQuestionIndex, carouselRef } =
     useAttemptState();
   const { mutate: createAttempt } = useCreateAttempt();
   const goToNextStep = () => {
     if (currentQuestionIndex === questions.length - 1) {
-      createAttempt();
+      if (mode === 'new') createAttempt();
       return router.replace('/(app)/(challenge)/attempt/results');
     }
     carouselRef.current?.scrollToIndex({
@@ -33,6 +33,14 @@ export const useAttemptCarousel = () => {
     setCurrentQuestionIndex(currentQuestionIndex - 1);
   };
 
+  const reset = () => {
+    setCurrentQuestionIndex(0);
+    carouselRef.current?.scrollToIndex({
+      index: 0,
+      animated: false,
+    });
+  };
+
   const isFirstQuestion = currentQuestionIndex === 0;
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
@@ -44,5 +52,6 @@ export const useAttemptCarousel = () => {
     isFirstQuestion,
     isLastQuestion,
     currentQuestionIndex,
+    reset,
   };
 };

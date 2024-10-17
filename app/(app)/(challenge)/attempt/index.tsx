@@ -8,13 +8,16 @@ import AttemptCarousel from '@/components/challenge/attempt/attempt-carousel';
 import AttemptHeader from '@/components/challenge/attempt/attep-header';
 import ScreenBackground from '@/components/shared/screen-background';
 import { useChallengeList } from '@/data/fetchers/challenge.fetcher';
+import { useAttempt } from '@/hooks/attempt/useAttempt';
 import { useAttemptCarousel } from '@/hooks/attempt/useAttemptCarousel';
 
 const AttemptScreen = () => {
   const { styles } = useStyles(stylesheet);
   const { currentQuestionIndex } = useAttemptCarousel();
+  const { resetAttempt } = useAttempt();
   const { data: challenges } = useChallengeList();
   const closeScreen = () => {
+    resetAttempt();
     if (challenges && challenges?.data.length > 0)
       router.replace('/(app)/(tabs)');
     else router.replace('/(app)/(challenge)/creation');

@@ -10,7 +10,12 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import Text from './text';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'text' | 'tertiary';
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'text'
+  | 'tertiary'
+  | 'success';
 interface ButtonProps extends PressableProps {
   children: React.ReactNode;
   mode?: 'solid' | 'gradient';
@@ -100,6 +105,9 @@ const stylesheet = createStyleSheet((theme) => ({
         },
         text: {
           backgroundColor: 'transparent',
+        },
+        success: {
+          backgroundColor: '#52AD48',
         },
       },
     },

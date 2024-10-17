@@ -5,13 +5,14 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import HomeHeader from '@/components/home/home-header';
 import HomeInfo from '@/components/home/home-info';
 import ChallengeList from '@/components/shared/challenge-list/challenge-list';
+import ScreenBackground from '@/components/shared/screen-background';
 
 const HomeScreen = () => {
   const { styles } = useStyles(stylesheet);
   return (
     <>
       <View style={styles.container}>
-        {/* <AnimatedStars /> */}
+        <ScreenBackground />
         <HomeHeader />
         <HomeInfo />
         <ChallengeList />

@@ -12,6 +12,7 @@ export const createChallenge = async (body: ChallengeCreationBody) => {
 };
 
 export const getListOfChallenges = async () => {
+  await wait(3000);
   const { data } = await privateApi.get<{ data: MinChallenge[] }>(
     '/challenge/all',
   );

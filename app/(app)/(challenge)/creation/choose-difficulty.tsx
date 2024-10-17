@@ -18,6 +18,7 @@ const ChooseDifficulty = () => {
     setDifficulty(star);
   };
   const goToNext = () => {
+    if (!difficulty) return;
     router.push('/(app)/creation/preparing');
   };
   return (

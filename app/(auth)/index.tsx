@@ -2,29 +2,29 @@ import { MotiView } from 'moti';
 import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
-import Planets from '@/animations/components/planets';
 import AnimatedStars from '@/components/shared/animated-stars';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
 import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
 import Nebu from '@/illustrations/nebu.illustration';
+import SpaceWithStars from '@/illustrations/space-with-stars.illustration';
 const AuthScreen = () => {
   const { styles } = useStyles(stylesheet);
   const { authenticate } = useGoogleAuth();
 
   return (
     <View style={styles.container}>
+      <AnimatedStars color="white" quantity={30} />
+      <View style={styles.background}>
+        <SpaceWithStars width={400} height={400} />
+      </View>
       <View style={styles.screen}>
-        <AnimatedStars color="white" />
-        <View style={styles.planets}>
-          <Planets />
-        </View>
         <View style={styles.illustration}>
           <MotiView
             style={styles.nebu}
             from={{ opacity: 0, scale: 0.5, translateX: 10 }}
             animate={{ opacity: 1, scale: 1, translateX: 25 }}
-            transition={{ type: 'timing', duration: 1000 }}
+            transition={{ type: 'timing', duration: 1500 }}
           >
             <Nebu height={'100%'} width={'100%'} />
           </MotiView>
@@ -72,17 +72,12 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     paddingBottom: runtime.insets.bottom + 20,
   },
   screen: {
+    position: 'relative',
     flex: 1,
+    paddingTop: 310,
   },
   planets: {
     height: 300,
-  },
-  gradient: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    zIndex: 99,
-    top: 200,
   },
   titleContainer: {
     alignSelf: 'center',
@@ -102,6 +97,15 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     alignSelf: 'center',
   },
   footer: {
+    zIndex: 99,
     paddingHorizontal: theme.sizes.screenPadding,
+  },
+  background: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
   },
 }));

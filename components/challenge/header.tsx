@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import { useUserProfile } from '@/data/fetchers/auth.fetcher';
+import { isOldUser } from '@/utils/user.utils';
 
 import UserContextMenu from '../user/user-context-menu';
 
@@ -15,7 +16,7 @@ const ChallengeHeader = () => {
   };
   return (
     <View style={styles.header}>
-      {user?.attemptsMade! > 0 ? (
+      {isOldUser(user) ? (
         <Feather name="x" style={styles.x} size={24} onPress={goBack} />
       ) : (
         <UserContextMenu />

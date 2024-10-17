@@ -19,4 +19,6 @@ web-build/
 expo-env.d.ts
 android
 ios
+.env
+.cursorrules
 # @end expo-cli

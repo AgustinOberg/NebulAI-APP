@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { queryClient } from '@/config/query.config';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
 import { getResults } from '@/utils/challenge.utils';
 
@@ -15,5 +16,10 @@ export const useCreateAttempt = () => {
         challenge: challengeId!,
         score: parseInt(getResults(questions, answers).percentage, 10),
       }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['user-profile'],
+      });
+    },
   });
 };

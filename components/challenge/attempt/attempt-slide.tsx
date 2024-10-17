@@ -3,6 +3,7 @@ import { FlatList, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import Text from '@/components/ui/text';
+import type { AttemptMode } from '@/data/state/attempt.store';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
 import type { Question } from '@/types/challenge';
 
@@ -18,9 +19,21 @@ const Separator = () => {
   return <View style={styles.separator} />;
 };
 
+const getAttemptType = (
+  mode: AttemptMode,
+  isChosen: boolean,
+  isCorrect: boolean,
+) => {
+  if (mode === 'view') {
+    if (isCorrect) return 'success';
+  }
+  if (isChosen) return 'primary';
+  return 'secondary';
+};
+
 const AttemptSlide = ({ style, currentQuestion }: Props) => {
   const { styles } = useStyles(stylesheet);
-  const { answers, completeQuestion } = useAttempt();
+  const { answers, completeQuestion, mode } = useAttempt();
 
   return (
     <View style={[styles.container, style]}>
@@ -35,14 +48,17 @@ const AttemptSlide = ({ style, currentQuestion }: Props) => {
         ItemSeparatorComponent={Separator}
         renderItem={({ item, index }) => {
           const isChosen = answers[currentQuestion._id] === item._id;
+          const isCorrect = item.isCorrect;
+
           return (
             <AttemptQuestion
               option={item}
               delay={index * 1000}
               onPress={() => {
+                if (mode === 'view') return;
                 completeQuestion(currentQuestion._id, item._id);
               }}
-              type={isChosen ? 'primary' : 'secondary'}
+              type={getAttemptType(mode, isChosen, isCorrect)}
             />
           );
         }}

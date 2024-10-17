@@ -5,6 +5,8 @@ import { router } from 'expo-router';
 import { ERRORS } from '@/constants/errors.constants';
 import { useUserStore } from '@/data/state/user.store';
 
+import { env } from './env';
+
 const setLogInterceptor = (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.request.use((request) => {
     console.log(
@@ -15,10 +17,10 @@ const setLogInterceptor = (axiosInstance: AxiosInstance) => {
 };
 
 export const publicApi = axios.create({
-  baseURL: 'http://192.168.0.125:3000/api',
+  baseURL: env.EXPO_PUBLIC_BACKEND_URL,
 });
 export const privateApi = axios.create({
-  baseURL: 'http://192.168.0.125:3000/api',
+  baseURL: env.EXPO_PUBLIC_BACKEND_URL,
 });
 
 const setAuthorizationInterceptors = (axiosInstance: AxiosInstance) => {
