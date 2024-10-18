@@ -12,8 +12,8 @@ export const useAutoChallengeCreation = (callback?: (c: Challenge) => void) => {
   useEffect(() => {
     if (content && difficulty && !alreadyCalled) {
       createChallenge(callback);
+      setAlreadyCalled(true);
     }
-    setAlreadyCalled(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content, difficulty]);
 };

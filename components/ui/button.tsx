@@ -1,14 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import type {
-  PressableProps,
-  StyleProp,
-  TextProps,
-  ViewStyle,
-} from 'react-native';
+import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
 import { Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
-import Text from './text';
+import Text, { TextProps } from './text';
 
 export type ButtonVariant =
   | 'primary'

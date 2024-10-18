@@ -1,16 +1,29 @@
 {
   "cli": {
-    "version": ">= 9.1.0"
+    "version": ">= 7.8.3",
+    "appVersionSource": "remote"
   },
   "build": {
-    "development": {
-      "developmentClient": true,
+    "staging-preview": {
+      "channel": "staging-preview",
+      "autoIncrement": false,
       "distribution": "internal"
     },
-    "preview": {
+    "staging-store": {
+      "channel": "staging-store",
+      "autoIncrement": false,
+      "distribution": "store"
+    },
+    "production-preview": {
+      "channel": "production-preview",
+      "autoIncrement": true,
       "distribution": "internal"
     },
-    "production": {}
+    "production-store": {
+      "channel": "production-store",
+      "autoIncrement": true,
+      "distribution": "store"
+    }
   },
   "submit": {
     "production": {}

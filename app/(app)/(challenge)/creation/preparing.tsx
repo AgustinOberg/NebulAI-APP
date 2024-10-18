@@ -4,6 +4,7 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import AstronautWaving from '@/animations/components/astronaut-waving';
 import Space from '@/animations/components/space';
+import Spinner from '@/components/ui/spinner';
 import Text from '@/components/ui/text';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
 import { useAutoChallengeCreation } from '@/hooks/useAutoChallengeCreation';
@@ -29,7 +30,7 @@ const PreparingScreen = () => {
       </View>
       <View style={styles.screenContainer}>
         <View>
-          <Text color="secondary" size={30} weight="700" style={styles.title}>
+          <Text color="secondary" size={30} weight="700" align="center">
             Preparando tu Misión
           </Text>
 
@@ -49,6 +50,19 @@ const PreparingScreen = () => {
               </MotiView>
             )}
           />
+          <MotiView
+            style={styles.spinnerContainer}
+            from={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              type: 'timing',
+              duration: 1000,
+              delay: LOADING_TEXTS.length * 2500,
+            }}
+          >
+            <Spinner size="small" />
+            <Text color="secondary">Creando tu desafío...</Text>
+          </MotiView>
         </View>
       </View>
     </>
@@ -80,8 +94,13 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
   footer: {
     marginBottom: theme.sizes.footer + runtime.insets.bottom,
   },
-  title: {
-    textAlign: 'center',
+  spinnerContainer: {
+    position: 'absolute',
+    bottom: runtime.insets.bottom + 20,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
   },
   contentContainer: {
     paddingHorizontal: theme.sizes.screenPadding,

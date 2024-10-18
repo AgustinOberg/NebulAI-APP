@@ -19,7 +19,7 @@ const HomeHeader = () => {
         <View>
           <Text size={13}>Hola de nuevo,</Text>
           <Text size={25} weight="800">
-            Leshi
+            {profile?.name}
           </Text>
         </View>
       </View>

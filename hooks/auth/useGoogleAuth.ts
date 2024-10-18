@@ -23,7 +23,7 @@ export const useGoogleAuth = () => {
     await GoogleSignin.hasPlayServices();
     const response = await GoogleSignin.signIn();
     const idToken = response.data?.idToken;
-    if (idToken) authWithGoogle(idToken);
+    if (idToken) authWithGoogle({ idToken });
   };
 
   return {

@@ -5,7 +5,8 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import Spinner from '@/components/ui/spinner';
 import Text from '@/components/ui/text';
 import type { MinChallenge } from '@/types/challenge';
-
+import { format } from 'date-fns';
+import React from 'react';
 interface Props {
   startAttempt: () => void;
   item: MinChallenge;
@@ -20,7 +21,7 @@ const ChallengeListItem = ({ item, startAttempt, isLoading }: Props) => {
           {item.title}
         </Text>
         <Text size={13} weight="300">
-          {new Date(item.createdAt).toISOString()}
+          {format(new Date(item.createdAt), 'dd/MM/yyyy')}
         </Text>
       </View>
       <View style={styles.cardActions}>

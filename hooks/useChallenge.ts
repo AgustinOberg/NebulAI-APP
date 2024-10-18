@@ -3,7 +3,6 @@ import { useChallengeState } from '@/data/state/challenge.context';
 import type { Challenge } from '@/types/challenge';
 
 export const useChallenge = () => {
-  //processDocument
   const { content, difficulty } = useChallengeState();
 
   const { mutateAsync } = useChallengeCreation();

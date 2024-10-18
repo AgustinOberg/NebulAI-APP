@@ -1,16 +1,21 @@
-import type { StyleProp, TextProps, TextStyle } from 'react-native';
+import type {
+  StyleProp,
+  TextProps as RNTextProps,
+  TextStyle,
+} from 'react-native';
 import { Text as RNText } from 'react-native';
 import type { UnistylesVariants } from 'react-native-unistyles';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 type ComponentProps = UnistylesVariants<typeof stylesheet>;
 
-interface Props extends TextProps {
+export interface TextProps extends RNTextProps {
   weight?: ComponentProps['weight'];
   color?: ComponentProps['color'];
   children?: React.ReactNode;
   style?: StyleProp<TextStyle>;
   size?: number;
+  align?: 'left' | 'center' | 'right';
 }
 
 const Text = ({
@@ -19,8 +24,9 @@ const Text = ({
   color = 'primary',
   children,
   size = 16,
+  align = 'left',
   ...rest
-}: Props) => {
+}: TextProps) => {
   const { styles } = useStyles(stylesheet, {
     weight,
     color,
@@ -28,7 +34,10 @@ const Text = ({
 
   return (
     <>
-      <RNText style={[styles.text(size), style]} {...rest}>
+      <RNText
+        style={[styles.text(size), style, { textAlign: align }]}
+        {...rest}
+      >
         {children}
       </RNText>
     </>

@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import { MotiView } from 'moti';
 import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
@@ -5,6 +6,7 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import AnimatedStars from '@/components/shared/animated-stars';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
+import { TERMS_URL } from '@/constants/url.constants';
 import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
 import Nebu from '@/illustrations/nebu.illustration';
 import SpaceWithStars from '@/illustrations/space-with-stars.illustration';
@@ -57,6 +59,21 @@ const AuthScreen = () => {
         <Button mode="gradient" onPress={authenticate}>
           Iniciar sesión
         </Button>
+        <MotiView
+          style={styles.terms}
+          from={{ opacity: 0, translateY: 10 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ type: 'timing', duration: 1000, delay: 2000 }}
+        >
+          <Text size={13} align="center">
+            Al iniciar sesión, aceptas los{' '}
+            <Link href={TERMS_URL}>
+              <Text size={13} weight="700" align="center">
+                Términos y Condiciones de uso
+              </Text>
+            </Link>
+          </Text>
+        </MotiView>
       </MotiView>
     </View>
   );
@@ -107,5 +124,9 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     right: 0,
     bottom: 0,
     zIndex: -1,
+  },
+  terms: {
+    marginTop: 10,
+    opacity: 0.6,
   },
 }));

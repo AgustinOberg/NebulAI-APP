@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Alert } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import type { ButtonVariant } from '@/components/ui/button';
@@ -14,27 +14,26 @@ interface Props {
 
 const AttemptQuestion = ({ onPress, option, type }: Props) => {
   const { styles } = useStyles(stylesheet);
+  const showFullText = () => {
+    Alert.alert('Opción', option.description, [
+      {
+        text: 'OK',
+        style: 'default',
+      },
+    ]);
+  };
   return (
-    <View
-    // from={{
-    //   opacity: 0,
-    //   translateY: -20,
-    // }}
-    // animate={{
-    //   opacity: 1,
-    //   translateY: 0,
-    // }}
-    // delay={delay}
-    >
+    <>
       <Button
-        textProps={{ numberOfLines: 2, style: styles.text }}
+        textProps={{ numberOfLines: 2, style: styles.text, align: 'center' }}
+        onLongPress={showFullText}
         variant={type}
         style={styles.button}
         onPress={onPress}
       >
         {option.description}
       </Button>
-    </View>
+    </>
   );
 };
 
@@ -43,11 +42,11 @@ export default AttemptQuestion;
 const stylesheet = createStyleSheet(() => ({
   text: {
     paddingHorizontal: 12,
-    textAlign: 'center',
+    width: 'auto',
   },
   button: {
     height: 60,
-    alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 0,
   },
 }));

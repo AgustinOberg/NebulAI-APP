@@ -1,10 +1,11 @@
 import privateApi, { publicApi } from '@/config/api.config';
 import type { User } from '@/types/user';
 
-export const googleAuth = async (idToken: string) => {
+export const googleAuth = async ({ idToken }: { idToken: string }) => {
   const { data } = await publicApi.post<{ token: string }>('/auth/google', {
     idToken,
   });
+
   return data;
 };
 

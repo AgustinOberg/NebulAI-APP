@@ -49,7 +49,6 @@ const AttemptSlide = ({ style, currentQuestion }: Props) => {
         renderItem={({ item, index }) => {
           const isChosen = answers[currentQuestion._id] === item._id;
           const isCorrect = item.isCorrect;
-
           return (
             <AttemptQuestion
               option={item}

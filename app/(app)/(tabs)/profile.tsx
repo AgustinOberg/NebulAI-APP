@@ -1,3 +1,4 @@
+import { Feather } from '@expo/vector-icons';
 import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
@@ -9,7 +10,7 @@ import { useUser } from '@/data/state/user.store';
 
 const ProfileScreen = () => {
   const { styles } = useStyles(stylesheet);
-  const { logout } = useUser();
+  const { logout, deleteAccount } = useUser();
 
   return (
     <View style={styles.container}>
@@ -21,6 +22,13 @@ const ProfileScreen = () => {
           Cerrar sesión
         </Button>
       </View>
+      <Feather
+        name="trash-2"
+        size={18}
+        color="white"
+        style={styles.delete}
+        onPress={deleteAccount}
+      />
     </View>
   );
 };
@@ -36,5 +44,10 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
   footer: {
     paddingHorizontal: theme.sizes.screenPadding,
     marginBottom: runtime.insets.bottom + theme.sizes.footer,
+  },
+  delete: {
+    position: 'absolute',
+    top: runtime.insets.top + 10,
+    right: theme.sizes.screenPadding,
   },
 }));

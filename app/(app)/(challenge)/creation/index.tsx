@@ -41,10 +41,10 @@ const TestScreen = () => {
             <AstronautWaving />
           </MotiView>
           <View style={styles.content}>
-            <Text weight="700" size={30} style={styles.text}>
-              ¡Hola, soy Nebu el profe!
+            <Text weight="700" size={30} align="center">
+              ¡Hola, soy Nebu!
             </Text>
-            <Text weight="300" size={17} style={styles.text}>
+            <Text weight="300" size={17} align="center">
               Estoy aquí para ayudarte a transformar tus archivos en preguntas
               divertidas de opción múltiple.
             </Text>
@@ -68,7 +68,7 @@ const TestScreen = () => {
               Elegir Archivo
             </Button>
           </MotiView>
-          <Text style={styles.text} size={13} color="disabled">
+          <Text align="center" size={13} color="disabled">
             *Solo se aceptan archivos con extensión .pdf
           </Text>
         </View>
@@ -95,9 +95,6 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     alignSelf: 'center',
   },
 
-  text: {
-    textAlign: 'center',
-  },
   footer: {
     width: '100%',
     marginBottom: runtime.insets.bottom + theme.sizes.footer,

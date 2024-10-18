@@ -56,10 +56,10 @@ const Results = () => {
             transition={{ type: 'timing', duration: 500, delay: 500 * 5 }}
           >
             <>
-              <Text size={16} style={styles.description}>
+              <Text size={16} align="center">
                 Contestaste correctamente{' '}
                 <Text weight="800">{results.correctAnswers}</Text> de las{' '}
-                <Text weight="800">{results.totalQuestions}</Text> preguntas.
+                <Text weight="800">{results.totalQuestions}</Text> preguntas
               </Text>
             </>
           </MotiView>
@@ -105,9 +105,7 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     alignItems: 'center',
     width: '60%',
   },
-  description: {
-    textAlign: 'center',
-  },
+
   footer: {
     zIndex: 999,
     width: '100%',

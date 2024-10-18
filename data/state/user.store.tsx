@@ -5,6 +5,8 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 import { asyncStoragePersistConfig } from '@/utils/storage.utils';
+import { Alert, Linking } from 'react-native';
+import { DELETE_ACCOUNT_URL } from '@/constants/url.constants';
 
 interface UserStore {
   // Properties
@@ -65,10 +67,31 @@ export const useUser = () => {
     logoutState();
   };
 
+  const deleteAccount = () => {
+    Alert.alert(
+      'Eliminar cuenta',
+      '¿Estás seguro de que deseas eliminar tu cuenta?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          style: 'destructive',
+          onPress: () => {
+            Linking.openURL(DELETE_ACCOUNT_URL);
+          },
+        },
+      ],
+    );
+  };
+
   return {
     token,
     isAuthenticated,
     setToken,
     logout,
+    deleteAccount,
   };
 };

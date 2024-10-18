@@ -8,9 +8,11 @@ export const useAuthWithGoogle = () => {
   const { setToken } = useUser();
   return useMutation({
     mutationFn: googleAuth,
-    onSuccess: ({ token }) => {
-      setToken(token);
-      router.replace('/(app)');
+    onSuccess: (data) => {
+      if (data) {
+        setToken(data.token);
+        router.replace('/(app)');
+      }
     },
   });
 };
