@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { router } from 'expo-router';
 import { MotiView } from 'moti';
 import React, { useMemo } from 'react';
@@ -71,10 +72,14 @@ const Results = () => {
         animate={{ opacity: 1, translateY: 0 }}
         transition={{ type: 'timing', duration: 500, delay: 500 * 5 }}
       >
-        <Button variant="tertiary" onPress={goToResponses}>
+        <Button
+          variant="tertiary"
+          onPress={goToResponses}
+          eventName="go_to_responses"
+        >
           Ver respuestas
         </Button>
-        <Button variant="text" onPress={goToHome}>
+        <Button variant="text" onPress={goToHome} eventName="finish_challenge">
           Finalizar
         </Button>
       </MotiView>

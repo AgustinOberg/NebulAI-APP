@@ -13,7 +13,7 @@ const Star = ({ isSelected, withAnimation }: Props) => {
   useEffect(() => {
     lottieRef?.current?.reset();
     if (isSelected) {
-      lottieRef?.current?.play(11, 32);
+      lottieRef?.current?.play(10, 32);
     } else {
       lottieRef?.current?.pause();
     }

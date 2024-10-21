@@ -16,7 +16,7 @@ const ProfileHeader = () => {
           style={styles.unscaledPicture}
         />
       </View>
-      <Text size={30} weight="800" style={styles.name}>
+      <Text size={30} weight="800" style={styles.name} align="center">
         {profile?.name}
       </Text>
     </View>

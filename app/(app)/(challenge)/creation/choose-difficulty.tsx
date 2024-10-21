@@ -3,8 +3,11 @@ import React from 'react';
 import { FlatList, Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
+import { Analytics } from '@/analytics';
+import { Prefix } from '@/analytics/events';
 import SpaceRide from '@/animations/components/space-ride';
 import Star from '@/animations/components/star';
+import CloseTab from '@/components/shared/close-tab';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
 import { useChallengeState } from '@/data/state/challenge.context';
@@ -13,8 +16,12 @@ const ANIMATION_HEIGHT = 400;
 
 const ChooseDifficulty = () => {
   const { styles } = useStyles(stylesheet);
-  const { setDifficulty, difficulty } = useChallengeState();
+  const { setDifficulty, difficulty, file } = useChallengeState();
+
   const onSelectStar = (star: number) => {
+    Analytics.trackEvent(Prefix.Actions.Press + 'select_difficulty', {
+      difficulty: star,
+    });
     setDifficulty(star);
   };
   const goToNext = () => {
@@ -23,12 +30,19 @@ const ChooseDifficulty = () => {
   };
   return (
     <>
+      <CloseTab />
       <View style={styles.animationContainer}>
         <SpaceRide />
       </View>
       <View style={styles.screenContainer}>
         <View>
-          <Text color="secondary" weight="700" size={30} style={styles.text}>
+          <Text
+            color="secondary"
+            weight="700"
+            size={30}
+            style={styles.text}
+            align="center"
+          >
             ¿Qué tan difícil quieres el reto?
           </Text>
         </View>
@@ -50,7 +64,14 @@ const ChooseDifficulty = () => {
           horizontal
         />
         <View style={styles.footer}>
-          <Button mode="gradient" onPress={goToNext}>
+          <Text style={styles.fileName} numberOfLines={1} align="center">
+            {file?.assets?.[0]?.name}
+          </Text>
+          <Button
+            mode="gradient"
+            onPress={goToNext}
+            eventName="go_to_next_step"
+          >
             Siguiente
           </Button>
         </View>
@@ -90,5 +111,9 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
   footer: {
     width: '100%',
     marginBottom: runtime.insets.bottom + theme.sizes.footer,
+  },
+  fileName: {
+    color: '#C000FD',
+    marginBottom: 9,
   },
 }));

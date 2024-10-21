@@ -3,7 +3,7 @@ import type * as DocumentPicker from 'expo-document-picker';
 import privateApi from '@/config/api.config';
 
 export const processDocument = async (
-  document: DocumentPicker.DocumentPickerResult
+  document: DocumentPicker.DocumentPickerResult,
 ) => {
   const formData = new FormData();
   const assets = document.assets;
@@ -25,7 +25,7 @@ export const processDocument = async (
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
       },
-    }
+    },
   );
 
   return data;

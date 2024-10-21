@@ -1,3 +1,4 @@
+import { Analytics } from '@/analytics';
 import privateApi, { publicApi } from '@/config/api.config';
 import type { User } from '@/types/user';
 
@@ -18,5 +19,17 @@ export const refreshToken = async () => {
 
 export const getUserProfile = async () => {
   const { data } = await privateApi.get<User>('/auth/profile');
+  try {
+    Analytics.identifyUser(data._id, {
+      name: data.name,
+      email: data.email,
+      avatar: data.picture,
+      firstName: data?.name?.split(' ')[0],
+      lastName: data?.name?.split(' ')[1],
+      language: data.locale,
+    });
+  } catch (error) {
+    console.error(error);
+  }
   return data;
 };

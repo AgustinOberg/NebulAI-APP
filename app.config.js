@@ -39,6 +39,15 @@ export default {
             'com.googleusercontent.apps.119729326913-3jtis94klm13tqjma8jhseeiromvfo23',
         },
       ],
+      [
+        '@sentry/react-native/expo',
+        {
+          url: 'https://sentry.io/',
+          note: 'Use SENTRY_AUTH_TOKEN env to authenticate with Sentry.',
+          project: 'nebulai-mobile',
+          organization: 'nebulai',
+        },
+      ],
     ],
     experiments: {
       typedRoutes: true,

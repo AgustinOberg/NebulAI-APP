@@ -1,7 +1,7 @@
 {
   "name": "nebulai",
   "main": "expo-router/entry",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -22,6 +22,7 @@
     "@react-native-google-signin/google-signin": "^13.1.0",
     "@react-native-menu/menu": "^1.1.3",
     "@react-navigation/native": "^6.0.2",
+    "@sentry/react-native": "~5.24.3",
     "@shopify/flash-list": "^1.7.1",
     "@shopify/react-native-skia": "1.2.3",
     "@tanstack/react-query": "^5.56.2",
@@ -42,6 +43,7 @@
     "expo-web-browser": "~13.0.3",
     "immer": "^10.1.1",
     "lottie-react-native": "6.7.0",
+    "mixpanel-react-native": "^3.0.7",
     "moti": "^0.29.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

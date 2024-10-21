@@ -22,10 +22,10 @@ const AboutScreen = () => {
           animate={{ translateY: 0, opacity: 1 }}
           transition={{ type: 'timing', duration: 500, delay: 300 }}
         >
-          <Text size={27} weight="800" color="secondary" style={styles.title}>
+          <Text size={27} weight="800" color="secondary" align="center">
             Sobre Nebulai
           </Text>
-          <Text size={16} color="secondary" style={styles.title}>
+          <Text size={16} color="secondary" align="center">
             {`Versión: ${APP_VERSION}`}
           </Text>
           <View style={styles.divider} />
@@ -87,9 +87,6 @@ const stylesheet = createStyleSheet((theme) => ({
     paddingVertical: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-  },
-  title: {
-    textAlign: 'center',
   },
   divider: {
     height: 0.3,

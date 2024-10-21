@@ -38,7 +38,7 @@ const AttemptSlide = ({ style, currentQuestion }: Props) => {
   return (
     <View style={[styles.container, style]}>
       <View style={styles.question}>
-        <Text size={23} style={styles.title} numberOfLines={8}>
+        <Text size={23} numberOfLines={8} align="center">
           {currentQuestion.question}
         </Text>
       </View>
@@ -86,9 +86,7 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     padding: 20,
     marginVertical: 20,
   },
-  title: {
-    textAlign: 'center',
-  },
+
   footer: {
     width: '100%',
     marginBottom: runtime.insets.bottom + theme.sizes.footer,

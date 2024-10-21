@@ -1,9 +1,18 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import type { PressableProps, StyleProp, ViewStyle } from 'react-native';
+import { useCallback } from 'react';
+import type {
+  GestureResponderEvent,
+  PressableProps,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import { Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
-import Text, { TextProps } from './text';
+import { Analytics } from '@/analytics';
+
+import type { TextProps } from './text';
+import Text from './text';
 
 export type ButtonVariant =
   | 'primary'
@@ -17,6 +26,8 @@ interface ButtonProps extends PressableProps {
   variant?: ButtonVariant;
   containerStyle?: StyleProp<ViewStyle>;
   textProps?: TextProps;
+  eventName?: string;
+  eventProperties?: Record<string, any>;
 }
 
 const Button = ({
@@ -25,11 +36,26 @@ const Button = ({
   variant = 'primary',
   containerStyle,
   textProps,
+  eventName,
+  eventProperties,
   ...rest
 }: ButtonProps) => {
   const { styles } = useStyles(stylesheet, { variant });
+  const onPressIn = useCallback(
+    (event: GestureResponderEvent) => {
+      //TODO: haptic feedback
+      if (eventName) {
+        Analytics.trackEvent(
+          'user_action_press_button_' + eventName,
+          eventProperties,
+        );
+      }
+      rest.onPressIn?.(event);
+    },
+    [eventName, eventProperties, rest],
+  );
   return (
-    <Pressable style={styles.container} {...rest}>
+    <Pressable style={styles.container} {...rest} onPressIn={onPressIn}>
       {mode === 'gradient' ? (
         <LinearGradient
           colors={['#7F00FF', '#DC00FC']}
@@ -67,14 +93,9 @@ const stylesheet = createStyleSheet((theme) => ({
           shadowRadius: 0,
         },
         default: {
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 2,
-          shadowColor: theme.colors.secondaryText,
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
+          elevation: 0,
+          shadowOpacity: 0,
+          shadowRadius: 0,
         },
       },
     },

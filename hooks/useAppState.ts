@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { AppState, AppStateStatus } from 'react-native';
+import { useEffect, useState } from 'react';
+import type { AppStateStatus } from 'react-native';
+import { AppState } from 'react-native';
 
 type AppStateHook = {
   appState: AppStateStatus;

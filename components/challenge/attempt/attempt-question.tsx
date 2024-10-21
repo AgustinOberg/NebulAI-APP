@@ -28,6 +28,8 @@ const AttemptQuestion = ({ onPress, option, type }: Props) => {
         textProps={{ numberOfLines: 2, style: styles.text, align: 'center' }}
         onLongPress={showFullText}
         variant={type}
+        eventName="attempt_question"
+        eventProperties={option}
         style={styles.button}
         onPress={onPress}
       >

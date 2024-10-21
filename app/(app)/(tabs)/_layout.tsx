@@ -41,12 +41,12 @@ const _layout = () => {
   );
 };
 
-const stylesheet = createStyleSheet(() => ({
+const stylesheet = createStyleSheet((theme, runtime) => ({
   tabBar: {
     backgroundColor: '#373D70',
     elevation: 0,
     borderTopWidth: 0,
-    height: Platform.OS === 'android' ? 105 : 90,
+    height: Platform.OS === 'android' ? runtime.insets.bottom + 65 : 90,
   },
 }));
 

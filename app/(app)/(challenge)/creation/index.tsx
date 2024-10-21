@@ -1,70 +1,47 @@
 import { router } from 'expo-router';
 import { MotiView } from 'moti';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
-import AstronautWaving from '@/animations/components/astronaut-waving';
+import ChallengeCreationPresentation from '@/components/challenge/creation/challenge-creation-presentation';
 import ChallengeHeader from '@/components/challenge/header';
 import ScreenBackground from '@/components/shared/screen-background';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
+import { useChallengeState } from '@/data/state/challenge.context';
 import { useProcessFile } from '@/hooks/useProcessFile';
 
-const TestScreen = () => {
+const AttemptCreationScreen = () => {
   const { styles } = useStyles(stylesheet);
   const { selectFile } = useProcessFile();
+  const { setDifficulty } = useChallengeState();
 
-  const handleSelect = async () => {
+  const handleSelect = useCallback(async () => {
     await selectFile();
-    router.push('/(app)/(challenge)/creation/choose-difficulty');
-  };
+    setDifficulty(0);
+    router.replace('/(app)/(challenge)/creation/choose-difficulty');
+  }, [selectFile, setDifficulty]);
+
   return (
     <>
       <ScreenBackground />
       <ChallengeHeader />
       <View style={styles.screenContainer}>
         <View>
-          <MotiView
-            style={styles.animationContainer}
-            from={{
-              translateX: -100,
-            }}
-            animate={{
-              translateX: 0,
-            }}
-            transition={{
-              type: 'timing',
-              duration: 1000,
-            }}
-          >
-            <AstronautWaving />
-          </MotiView>
-          <View style={styles.content}>
-            <Text weight="700" size={30} align="center">
-              ¡Hola!, soy Nebu 👋
-            </Text>
-            <Text weight="300" size={17} align="center">
-              Estoy aquí para ayudarte a transformar tus archivos en preguntas
-              divertidas de opción múltiple.
-            </Text>
-          </View>
+          <ChallengeCreationPresentation />
         </View>
         <View style={styles.footer}>
           <MotiView
-            from={{
-              scale: 0.97,
-            }}
-            animate={{
-              scale: 1,
-            }}
-            transition={{
-              type: 'timing',
-              duration: 1000,
-              loop: true,
-            }}
+            from={{ scale: 0.97 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'timing', duration: 1000, loop: true }}
           >
-            <Button mode="gradient" onPress={handleSelect}>
+            <Button
+              mode="gradient"
+              onPress={handleSelect}
+              eventName="attempt_creation_select_file"
+            >
               Elegir Archivo
             </Button>
           </MotiView>
@@ -85,16 +62,6 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  content: {
-    gap: 5,
-    marginTop: 20,
-  },
-  animationContainer: {
-    height: 140,
-    width: 140,
-    alignSelf: 'center',
-  },
-
   footer: {
     width: '100%',
     marginBottom: runtime.insets.bottom + theme.sizes.footer,
@@ -102,4 +69,4 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
   },
 }));
 
-export default TestScreen;
+export default AttemptCreationScreen;

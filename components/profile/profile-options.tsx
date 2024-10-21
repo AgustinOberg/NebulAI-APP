@@ -3,6 +3,8 @@ import { useCallback, useMemo } from 'react';
 import { FlatList, Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
+import { Analytics } from '@/analytics';
+import { Prefix } from '@/analytics/events';
 import { useAppFeedback } from '@/hooks/useAppFeedback';
 import { hex2rgba } from '@/utils/ui.utils';
 
@@ -48,14 +50,20 @@ const ProfileOptions = () => {
     () => <View style={styles.spacer} />,
     [styles.spacer],
   );
+  const onPressOption = useCallback((option: Option) => {
+    option.action();
+    Analytics.trackEvent(Prefix.Actions.Button + 'profile_option', {
+      option: option.label,
+    });
+  }, []);
   const renderItem = useCallback(
     ({ item }: { item: Option }) => (
-      <Pressable onPress={item.action} style={styles.option}>
+      <Pressable onPress={() => onPressOption(item)} style={styles.option}>
         <Feather name={item.icon} size={20} color={'white'} />
         <Text size={17}>{item.label}</Text>
       </Pressable>
     ),
-    [styles.option],
+    [onPressOption, styles],
   );
   return (
     <FlatList

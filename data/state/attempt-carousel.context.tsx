@@ -9,7 +9,7 @@ interface AttemptContextType {
 
 const AttemptContext = createContext<AttemptContextType | undefined>(undefined);
 
-const AttemptProvider = ({ children }: React.PropsWithChildren) => {
+const AttemptCarouselProvider = ({ children }: React.PropsWithChildren) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const carouselRef = useRef<FlatList>(null);
   return (
@@ -25,12 +25,14 @@ const AttemptProvider = ({ children }: React.PropsWithChildren) => {
   );
 };
 
-export const useAttemptState = () => {
+export const useAttemptCarouselState = () => {
   const context = useContext(AttemptContext);
   if (context === undefined) {
-    throw new Error('useAttemptState must be used within a AttemptProvider');
+    throw new Error(
+      'useAttemptCarouselState must be used within a AttemptCarouselProvider',
+    );
   }
   return context;
 };
 
-export default AttemptProvider;
+export default AttemptCarouselProvider;

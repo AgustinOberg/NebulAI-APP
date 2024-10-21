@@ -1,12 +1,14 @@
 import { router } from 'expo-router';
+import { Alert, Linking } from 'react-native';
 import type { StateCreator } from 'zustand';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
-import { asyncStoragePersistConfig } from '@/utils/storage.utils';
-import { Alert, Linking } from 'react-native';
+import { Analytics } from '@/analytics';
+import { Prefix } from '@/analytics/events';
 import { DELETE_ACCOUNT_URL } from '@/constants/url.constants';
+import { asyncStoragePersistConfig } from '@/utils/storage.utils';
 
 interface UserStore {
   // Properties
@@ -63,11 +65,14 @@ export const useUser = () => {
   const logoutState = useUserStore((state) => state.logout);
 
   const logout = () => {
+    Analytics.trackEvent(Prefix.System.default + 'logout');
+    Analytics.reset();
     router.replace('/(auth)');
     logoutState();
   };
 
   const deleteAccount = () => {
+    Analytics.trackEvent(Prefix.System.default + 'delete_account');
     Alert.alert(
       'Eliminar cuenta',
       '¿Estás seguro de que deseas eliminar tu cuenta?',
@@ -80,6 +85,9 @@ export const useUser = () => {
           text: 'Eliminar',
           style: 'destructive',
           onPress: () => {
+            Analytics.trackEvent(
+              Prefix.System.default + 'delete_account_confirmed',
+            );
             Linking.openURL(DELETE_ACCOUNT_URL);
           },
         },

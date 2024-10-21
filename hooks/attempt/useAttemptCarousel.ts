@@ -1,14 +1,14 @@
 import { router } from 'expo-router';
 
 import { useCreateAttempt } from '@/data/fetchers/attempt.fetcher';
-import { useAttemptState } from '@/data/state/attempt.context';
+import { useAttemptCarouselState } from '@/data/state/attempt-carousel.context';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
 
 export const useAttemptCarousel = () => {
   const { questions, mode } = useAttempt();
 
   const { currentQuestionIndex, setCurrentQuestionIndex, carouselRef } =
-    useAttemptState();
+    useAttemptCarouselState();
   const { mutate: createAttempt } = useCreateAttempt();
   const goToNextStep = () => {
     if (currentQuestionIndex === questions.length - 1) {

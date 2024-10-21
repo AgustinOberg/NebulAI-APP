@@ -1,8 +1,10 @@
+/* eslint-disable max-lines-per-function */
 import { Link } from 'expo-router';
 import { MotiView } from 'moti';
 import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
+import { Events } from '@/analytics/events';
 import AnimatedStars from '@/components/shared/animated-stars';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
@@ -45,7 +47,7 @@ const AuthScreen = () => {
             transition={{ type: 'timing', duration: 1000, delay: 1500 }}
           >
             <Text size={16} weight="500" style={styles.title}>
-              Conquista el conocimiento
+              ¡Conquista el conocimiento!
             </Text>
           </MotiView>
         </View>
@@ -56,7 +58,11 @@ const AuthScreen = () => {
         animate={{ opacity: 1, translateY: 0 }}
         transition={{ type: 'timing', duration: 1000, delay: 1750 }}
       >
-        <Button mode="gradient" onPress={authenticate}>
+        <Button
+          mode="gradient"
+          eventName={Events.Actions.AUTH_BUTTON}
+          onPress={authenticate}
+        >
           Iniciar sesión
         </Button>
         <MotiView

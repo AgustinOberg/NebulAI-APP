@@ -6,7 +6,9 @@ import { SplashScreen, Stack } from 'expo-router';
 import React from 'react';
 import FlashMessage from 'react-native-flash-message';
 export { ErrorBoundary } from 'expo-router';
+import '@/config/error/sentry.credentials';
 
+import SentryAppWrap from '@/config/error/sentry.config';
 import { queryClient } from '@/config/query.config';
 import { useSplashScreen } from '@/hooks/useSplashScreen';
 SplashScreen.preventAutoHideAsync();
@@ -31,7 +33,7 @@ const App = () => {
   );
 };
 
-export default function RootLayout() {
+function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <App />
@@ -39,3 +41,5 @@ export default function RootLayout() {
     </QueryClientProvider>
   );
 }
+
+export default SentryAppWrap(RootLayout);

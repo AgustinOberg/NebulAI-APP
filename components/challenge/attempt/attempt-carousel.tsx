@@ -50,14 +50,24 @@ const AttemptCarousel = () => {
       <View style={styles.footer}>
         {isCompleted && (
           <Animated.View entering={FadeInDown}>
-            <Button variant="tertiary" onPress={goToNextStep}>
+            <Button
+              variant="tertiary"
+              onPress={goToNextStep}
+              eventName="attempt_next"
+              eventProperties={{ index: currentQuestionIndex }}
+            >
               Siguiente
             </Button>
           </Animated.View>
         )}
         {currentQuestionIndex !== 0 ? (
           <Animated.View entering={FadeInDown} exiting={FadeOutDown}>
-            <Button onPress={goToPreviousStep} variant="text">
+            <Button
+              onPress={goToPreviousStep}
+              variant="text"
+              eventName="attempt_previous"
+              eventProperties={{ index: currentQuestionIndex }}
+            >
               Volver
             </Button>
           </Animated.View>

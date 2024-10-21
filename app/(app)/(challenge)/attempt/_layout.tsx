@@ -2,13 +2,13 @@ import { Stack } from 'expo-router';
 import React from 'react';
 import { useStyles } from 'react-native-unistyles';
 
-import AttemptProvider from '@/data/state/attempt.context';
+import AttemptCarouselProvider from '@/data/state/attempt-carousel.context';
 
 const _layout = () => {
   const { theme } = useStyles();
 
   return (
-    <AttemptProvider>
+    <AttemptCarouselProvider>
       <Stack
         screenOptions={{
           headerShown: false,
@@ -20,7 +20,7 @@ const _layout = () => {
         <Stack.Screen name="index" />
         <Stack.Screen name="results" />
       </Stack>
-    </AttemptProvider>
+    </AttemptCarouselProvider>
   );
 };
 

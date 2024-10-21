@@ -32,13 +32,14 @@ export const MiddleButton = () => {
     </>
   );
 };
-const stylesheet = createStyleSheet(() => ({
+const stylesheet = createStyleSheet((theme, runtime) => ({
   icon: {
     marginBottom: -2.5,
   },
   floatingButton: {
     position: 'absolute',
-    bottom: (Platform.OS === 'android' ? 105 : 90) - 23.5,
+    bottom:
+      Platform.OS === 'android' ? runtime.insets.bottom + 65 / 1.5 : 90 - 23.5,
     left: '50%',
     transform: [{ translateX: -30 }],
     backgroundColor: '#DC00FC',

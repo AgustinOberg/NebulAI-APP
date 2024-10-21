@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import ProfileHeader from '@/components/profile/profile-header';
@@ -15,6 +15,7 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <ScreenBackground />
+
       <ProfileHeader />
       <ProfileOptions />
       <View style={styles.footer}>
@@ -43,7 +44,10 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
   },
   footer: {
     paddingHorizontal: theme.sizes.screenPadding,
-    marginBottom: runtime.insets.bottom + theme.sizes.footer,
+    marginBottom:
+      runtime.insets.bottom +
+      theme.sizes.footer +
+      (Platform.OS === 'android' ? 40 : 0),
   },
   delete: {
     position: 'absolute',
