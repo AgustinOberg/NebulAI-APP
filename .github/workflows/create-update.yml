@@ -1,0 +1,90 @@
+name: '🆕 Create update 🆕'
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to update (ios or android)'
+        required: true
+        type: choice
+        options:
+          - ios
+          - android
+          - all
+      profile:
+        description: 'Environment'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      channel:
+        description: 'Channel to update (store or preview)'
+        required: true
+        type: choice
+        options:
+          - store
+          - preview
+      app_version:
+        description: 'App version to update'
+        required: true
+        type: string
+
+jobs:
+  update:
+    name: Install and update
+    runs-on: ubuntu-latest
+    steps:
+      - name: 💯 Check for EXPO_TOKEN
+        run: |
+          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
+            echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
+            exit 1
+          fi
+
+      - name: 💯 Check for ENV_FILE_DEVELOPMENT
+        run: |
+          if [ -z "${{ secrets.ENV_FILE_DEVELOPMENT }}" ]; then
+            echo "You must provide an ENV_FILE_DEVELOPMENT secret linked to this project"
+            exit 1
+          fi
+
+      - name: 💯 Check for ENV_FILE_PRODUCTION
+        run: |
+          if [ -z "${{ secrets.ENV_FILE_PRODUCTION }}" ]; then
+            echo "You must provide an ENV_FILE_PRODUCTION secret linked to this project"
+            exit 1
+          fi
+
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: ⚡️ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: 🙆🏼‍♂️ Update package.json version
+        run: |
+          NEW_VERSION=${{ github.event.inputs.app_version }}
+          echo "Updating package.json to version $NEW_VERSION"
+          bun run npm version $NEW_VERSION --no-git-tag-version
+      - name: 🙆🏼‍♂️ Verify updated version
+        run: cat package.json
+
+      - name: ⚡️ Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Create env file
+        run: |
+          echo "${{ secrets.ENV_FILE_DEVELOPMENT }}" > .env.staging
+          echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env.production
+
+      - name: Install dependencies
+        run: NODE_ENV=${{ github.event.inputs.profile }} bun install
+
+      - name: 📱 Run Update
+        id: run_update
+        run: NODE_ENV=${{ github.event.inputs.profile }} eas update --clear-cache --platform ${{ github.event.inputs.platform }} --branch ${{ github.event.inputs.profile }}-${{ github.event.inputs.channel }} --non-interactive --json -m "UPDATE_USING_GITHUB_ACTION" > update_output.json
