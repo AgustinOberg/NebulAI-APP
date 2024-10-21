@@ -42,7 +42,7 @@ const TestScreen = () => {
           </MotiView>
           <View style={styles.content}>
             <Text weight="700" size={30} align="center">
-              ¡Hola, soy Nebu!
+              ¡Hola!, soy Nebu 👋
             </Text>
             <Text weight="300" size={17} align="center">
               Estoy aquí para ayudarte a transformar tus archivos en preguntas
