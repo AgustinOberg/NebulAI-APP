@@ -51,11 +51,8 @@ export default {
         projectId: '639936ff-ffc0-470a-b07c-30e4bc4c5dbb',
       },
     },
-    owner: 'agustin.aguilera',
-    runtimeVersion: {
-      policy: 'appVersion',
-      runtimeVersion: packageJson.version,
-    },
+    owner: 'agustin.oberg',
+    runtimeVersion: packageJson.version,
     updates: {
       url: 'https://u.expo.dev/639936ff-ffc0-470a-b07c-30e4bc4c5dbb',
       enabled: true,
