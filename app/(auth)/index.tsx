@@ -72,7 +72,7 @@ const AuthScreen = () => {
           transition={{ type: 'timing', duration: 1000, delay: 2000 }}
         >
           <Text size={13} align="center">
-            Al iniciar sesión, aceptas los{' '}
+            Al iniciar sesión, automaticamente aceptas los{' '}
             <Link href={TERMS_URL}>
               <Text size={13} weight="700" align="center">
                 Términos y Condiciones de uso
