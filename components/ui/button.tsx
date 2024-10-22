@@ -1,3 +1,4 @@
+import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useCallback } from 'react';
 import type {
@@ -43,7 +44,7 @@ const Button = ({
   const { styles } = useStyles(stylesheet, { variant });
   const onPressIn = useCallback(
     (event: GestureResponderEvent) => {
-      //TODO: haptic feedback
+      Haptics.selectionAsync();
       if (eventName) {
         Analytics.trackEvent(
           'user_action_press_button_' + eventName,

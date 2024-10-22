@@ -1,4 +1,5 @@
-import { StateCreator, create } from 'zustand';
+import type { StateCreator } from 'zustand';
+import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 interface UpdatesState {

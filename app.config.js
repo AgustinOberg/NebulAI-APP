@@ -1,7 +1,7 @@
 import packageJson from './package.json';
 export default {
   expo: {
-    name: 'nebulai',
+    name: 'Nebulai',
     slug: 'nebulai',
     version: packageJson.version,
     orientation: 'portrait',
@@ -14,7 +14,7 @@ export default {
       resizeMode: 'cover',
     },
     ios: {
-      supportsTablet: true,
+      supportsTablet: false,
       bundleIdentifier: 'com.agustinoberg.nebulai',
     },
     android: {
@@ -24,10 +24,6 @@ export default {
       },
       package: 'com.agustinoberg.nebulai',
       versionCode: 10,
-    },
-    web: {
-      bundler: 'metro',
-      output: 'static',
     },
     plugins: [
       'expo-router',

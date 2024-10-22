@@ -22,4 +22,5 @@ export interface MinChallenge {
   title: string;
   description: string;
   createdAt: string;
+  difficulty: number;
 }

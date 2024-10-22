@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { router } from 'expo-router';
 
 import { getUserProfile, googleAuth, refreshToken } from '../api/auth.api';
 import { useUser } from '../state/user.store';
@@ -11,7 +10,7 @@ export const useAuthWithGoogle = () => {
     onSuccess: (data) => {
       if (data) {
         setToken(data.token);
-        router.replace('/(app)');
+        //router.replace('/(app)');
       }
     },
   });
