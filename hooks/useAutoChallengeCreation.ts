@@ -1,4 +1,6 @@
+import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
+import { showMessage } from 'react-native-flash-message';
 
 import { useChallengeState } from '@/data/state/challenge.context';
 import type { Challenge } from '@/types/challenge';
@@ -11,7 +13,14 @@ export const useAutoChallengeCreation = (callback?: (c: Challenge) => void) => {
   const [alreadyCalled, setAlreadyCalled] = useState(false);
   useEffect(() => {
     if (content && difficulty && !alreadyCalled) {
-      createChallenge(callback);
+      createChallenge(callback).catch(() => {
+        showMessage({
+          message: 'Error al crear desafío',
+          description: `Por favor, intenta nuevamente`,
+          type: 'danger',
+        });
+        router.replace('/(challenge)/creation');
+      });
       setAlreadyCalled(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
