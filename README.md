@@ -1,75 +1,79 @@
 # 🚀 NebulAI - Explore the Cosmos of Knowledge 🌌
 
-**NebulAI** es una aplicación futurista que te ayuda a estudiar de manera eficiente. Solo sube un archivo PDF, y nuestra avanzada inteligencia artificial generará un cuestionario de opción múltiple diseñado a tu medida. ¡Todo esto envuelto en una experiencia temática espacial que te hará sentir como un astronauta explorando el vasto universo del conocimiento!
+**NebulAI** is a futuristic app that helps you study efficiently. Simply upload a file, and our advanced artificial intelligence will generate a multiple-choice quiz tailored to your needs. All of this wrapped in a space-themed experience that will make you feel like an astronaut exploring the vast universe of knowledge!
 
-## 🌟 Funcionalidades principales
+## 🌟 Key Features
 
-- **📄 Carga de archivos PDF**: Sube tus documentos y NebulAI se encargará del resto.
-- **🤖 Generación de preguntas**: La IA analiza el contenido del PDF y genera preguntas de opción múltiple personalizadas.
-- **⭐ Dificultad ajustable**: Selecciona el nivel de dificultad de las preguntas (de 1 a 5 estrellas).
-- **🚀 Animaciones espaciales**: Disfruta de una interfaz dinámica llena de naves espaciales, estrellas y Nebu, tu astronauta guía personal.
+- **📄 File Upload**: Upload your documents, and NebulAI will handle the rest.
+- **🤖 Question Generation**: AI analyzes the content and creates personalized multiple-choice questions.
+- **⭐ Adjustable Difficulty**: Choose the difficulty level of the questions (from 1 to 5 stars).
+- **🚀 Space Animations**: Enjoy a dynamic interface filled with spaceships, stars, and Nebu, your personal astronaut guide.
 
-## 🛠️ Tecnologías
+## 🛠️ Technologies
 
-- **React Native** (💻 Construcción de la app)
-- **Expo** (📲 Entorno de desarrollo rápido)
-- **Bun** (⚡ Ultra rápido manejo de dependencias y scripts)
-- **TypeScript** (🔒 Tipado estático para código robusto)
+- **React Native** (💻 Building the app)
+- **Expo** (📲 Rapid development environment)
+- **Bun** (⚡ Ultra-fast dependency and script management)
+- **TypeScript** (🔒 Statically typed for robust code)
 
-## 🧑‍🚀 Cómo empezar
+## 🧑‍🚀 Getting Started
 
-Sigue estos simples pasos para desplegar **NebulAI** en tu dispositivo y comenzar a explorar el cosmos del aprendizaje.
+Follow these simple steps to deploy **NebulAI** on your device and start exploring the cosmos of learning.
 
-1. Clona el repositorio:
+1. Clone the repository:
 
    ```bash
-   git clone https://github.com/tu-usuario/nebulai.git
+   git clone https://github.com/your-username/nebulai.git
    cd nebulai
    ```
 
-2. Instala las dependencias con **Bun**:
+2. Install dependencies with **Bun**:
 
    ```bash
    bun install
    ```
 
-3. Inicia el proyecto con **Expo**:
+3. Start the project with **Expo**:
 
    ```bash
    expo start
    ```
 
-4. Escanea el código QR con tu dispositivo móvil y disfruta de **NebulAI**.
+4. Scan the QR code with your mobile device and enjoy **NebulAI**.
 
-## 🚀 Contribuyendo
+## 🚀 Contributing
 
-¡Tu ayuda es bienvenida! Siéntete libre de abrir issues, proponer mejoras o reportar bugs. Nos encantaría que esta aventura espacial crezca con tu ayuda. Para contribuir, sigue estos pasos:
+Your contributions are welcome! Feel free to open issues, suggest improvements, or report bugs. We’d love to see this space adventure grow with your help. To contribute, follow these steps:
 
-1. Haz un fork del proyecto.
-2. Crea una rama para tu feature (`git checkout -b feature/nebulosa-improvements`).
-3. Haz commit de tus cambios (`git commit -m 'Añadida nueva función de nebulosa'`).
-4. Empuja a la rama (`git push origin feature/nebulosa-improvements`).
-5. Abre un Pull Request.
+1. Fork the project.
+2. Create a branch for your feature (`git checkout -b feature/nebulosa-improvements`).
+3. Commit your changes (`git commit -m 'Added new nebula feature'`).
+4. Push to the branch (`git push origin feature/nebulosa-improvements`).
+5. Open a Pull Request.
 
 ## 🛰️ Roadmap
 
-- [x] Carga de archivos PDF.
-- [x] Generación automática de preguntas.
-- [ ] Interacción avanzada con Nebu, el astronauta.
-- [ ] Modo nocturno interestelar.
-- [ ] Exportar cuestionarios generados a otros formatos.
+- [x] File upload.
+- [x] Automatic question generation.
+- [x] Android release.
+- [ ] Internationalization.
+- [ ] Apple release.
+- [ ] Add file formats.
 
-## 👩‍🚀 Créditos
+## 👩‍🚀 Credits
 
-Creado con 💙 por el equipo de **NebulAI**, un grupo de apasionados por la tecnología y el conocimiento que no teme explorar las fronteras del universo.
+Created with 💙 by the **Agustin Oberg**.
 
-## 📡 Contacto
+## 📡 Contact
 
-Para preguntas, sugerencias o simplemente saludar, puedes contactarnos en:
+For questions, suggestions, or just to say hello, you can reach us at:
 
-- 🌌 [Página web](https://nebulai.space)
-- ✉️ Email: contacto@nebulai.space
+- ✉️ Email: agustin.oberg@gmail.com
 
 ---
 
-**NebulAI** - "Explora el cosmos del conocimiento y más allá."
+**NebulAI** - "Explore the cosmos of knowledge and beyond."
+
+---
+
+Este README está ahora completamente en inglés y refleja el cambio de "PDF" a "file" para hacerlo más flexible a futuro. ¿Te gustaría ajustar algo más?
