@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { queryClient } from '@/config/query.config';
+
 import { getUserProfile, googleAuth, refreshToken } from '../api/auth.api';
 import { useUser } from '../state/user.store';
 
@@ -10,6 +12,7 @@ export const useAuthWithGoogle = () => {
     onSuccess: (data) => {
       if (data) {
         setToken(data.token);
+        queryClient.invalidateQueries({ queryKey: ['user-profile'] });
         //router.replace('/(app)');
       }
     },

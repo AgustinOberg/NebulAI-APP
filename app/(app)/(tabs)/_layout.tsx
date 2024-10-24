@@ -10,6 +10,7 @@ import { isNewUser } from '@/utils/user.utils';
 const _layout = () => {
   const { styles } = useStyles(stylesheet);
   const { data: user } = useUserProfile();
+
   if (isNewUser(user)) {
     return <Redirect href="/(app)/(challenge)/creation" />;
   }

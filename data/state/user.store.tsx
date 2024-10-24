@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { Alert, Linking } from 'react-native';
 import type { StateCreator } from 'zustand';
 import { create } from 'zustand';
@@ -7,6 +7,7 @@ import { immer } from 'zustand/middleware/immer';
 
 import { Analytics } from '@/analytics';
 import { Prefix } from '@/analytics/events';
+import { queryClient } from '@/config/query.config';
 import { DELETE_ACCOUNT_URL } from '@/constants/url.constants';
 import { asyncStoragePersistConfig } from '@/utils/storage.utils';
 
@@ -35,6 +36,7 @@ const storeApi: StateCreator<UserStore, [['zustand/immer', never]]> = (
   // Methods
   setToken: (token) => {
     set((state) => {
+      GoogleSignin.signOut();
       state.token = token;
       state.isAuthenticated = true;
     });
@@ -43,6 +45,7 @@ const storeApi: StateCreator<UserStore, [['zustand/immer', never]]> = (
     set(() => initialState);
   },
   logout: () => {
+    GoogleSignin.signOut();
     useUserStore.getState().resetState();
   },
 });
@@ -65,9 +68,9 @@ export const useUser = () => {
   const logoutState = useUserStore((state) => state.logout);
 
   const logout = () => {
+    queryClient.removeQueries({ queryKey: ['user-profile'] });
     Analytics.trackEvent(Prefix.System.default + 'logout');
     Analytics.reset();
-    router.replace('/(auth)');
     logoutState();
   };
 
