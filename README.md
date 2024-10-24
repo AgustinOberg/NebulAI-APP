@@ -74,6 +74,4 @@ For questions, suggestions, or just to say hello, you can reach us at:
 
 **NebulAI** - "Explore the cosmos of knowledge and beyond."
 
----
 
-Este README está ahora completamente en inglés y refleja el cambio de "PDF" a "file" para hacerlo más flexible a futuro. ¿Te gustaría ajustar algo más?
