@@ -55,8 +55,9 @@ const AttemptCarousel = () => {
               onPress={goToNextStep}
               eventName="attempt_next"
               eventProperties={{ index: currentQuestionIndex }}
+              translate
             >
-              Siguiente
+              next
             </Button>
           </Animated.View>
         )}
@@ -67,8 +68,9 @@ const AttemptCarousel = () => {
               variant="text"
               eventName="attempt_previous"
               eventProperties={{ index: currentQuestionIndex }}
+              translate
             >
-              Volver
+              back
             </Button>
           </Animated.View>
         ) : (

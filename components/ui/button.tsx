@@ -29,6 +29,7 @@ interface ButtonProps extends PressableProps {
   textProps?: TextProps;
   eventName?: string;
   eventProperties?: Record<string, any>;
+  translate?: boolean;
 }
 
 const Button = ({
@@ -39,6 +40,7 @@ const Button = ({
   textProps,
   eventName,
   eventProperties,
+  translate = false,
   ...rest
 }: ButtonProps) => {
   const { styles } = useStyles(stylesheet, { variant });
@@ -68,7 +70,7 @@ const Button = ({
         <View style={[styles.buttonChildren, styles.fill, containerStyle]} />
       )}
       <>
-        <Text size={17} weight="700" {...textProps}>
+        <Text size={17} weight="700" {...textProps} translate={translate}>
           {children}
         </Text>
       </>

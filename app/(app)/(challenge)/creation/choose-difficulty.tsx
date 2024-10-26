@@ -42,8 +42,9 @@ const ChooseDifficulty = () => {
             size={30}
             style={styles.text}
             align="center"
+            translate
           >
-            ¿Qué tan difícil quieres el reto?
+            chooseDifficulty
           </Text>
         </View>
         <FlatList
@@ -71,8 +72,9 @@ const ChooseDifficulty = () => {
             mode="gradient"
             onPress={goToNext}
             eventName="go_to_next_step"
+            translate
           >
-            Siguiente
+            next
           </Button>
         </View>
       </View>

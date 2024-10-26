@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { env } from '@/config/env';
 import { useAuthWithGoogle } from '@/data/fetchers/auth.fetcher';
+import { useLang } from '@/language/useLang';
 
 const setupGoogleSignIn = () => {
   GoogleSignin.configure({
@@ -19,11 +20,13 @@ export const useGoogleAuth = () => {
     setupGoogleSignIn();
   }, []);
   const { mutate: authWithGoogle } = useAuthWithGoogle();
+  const { getCurrentLanguage } = useLang();
   const authenticate = async () => {
     await GoogleSignin.hasPlayServices();
     const response = await GoogleSignin.signIn();
+    const locale = await getCurrentLanguage();
     const idToken = response.data?.idToken;
-    if (idToken) authWithGoogle({ idToken });
+    if (idToken) authWithGoogle({ idToken, locale });
   };
 
   return {

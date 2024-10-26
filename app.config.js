@@ -16,6 +16,7 @@ export default {
     ios: {
       supportsTablet: false,
       bundleIdentifier: 'com.agustinoberg.nebulai',
+      usesAppleSignIn: true,
     },
     android: {
       adaptiveIcon: {
@@ -44,6 +45,8 @@ export default {
           organization: 'nebulai',
         },
       ],
+      'expo-localization',
+      'expo-apple-authentication',
     ],
     experiments: {
       typedRoutes: true,
