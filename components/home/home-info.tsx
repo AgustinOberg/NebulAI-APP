@@ -11,7 +11,10 @@ const HomeInfo = () => {
   return (
     <View style={styles.container}>
       <Text size={18} weight="900">
-        {profile?.challengesMade} <Text size={18}>desafíos realizados</Text>
+        {profile?.challengesMade}{' '}
+        <Text size={18} translate>
+          challengesMade
+        </Text>
       </Text>
     </View>
   );

@@ -4,10 +4,10 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import { useUserProfile } from '@/data/fetchers/auth.fetcher';
 
 import Text from '../ui/text';
-//import HomeNotification from './home-notification';
 
 const HomeHeader = () => {
   const { styles } = useStyles(stylesheet);
+
   const { data: profile } = useUserProfile();
   return (
     <View style={styles.header}>
@@ -17,7 +17,9 @@ const HomeHeader = () => {
           style={styles.unscaledPicture}
         />
         <View>
-          <Text size={13}>Hola de nuevo,</Text>
+          <Text size={13} translate>
+            welcomeBack
+          </Text>
           <Text size={25} weight="800">
             {profile?.name}
           </Text>

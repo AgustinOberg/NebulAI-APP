@@ -9,6 +9,7 @@ import { Analytics } from '@/analytics';
 import { Prefix } from '@/analytics/events';
 import { queryClient } from '@/config/query.config';
 import { DELETE_ACCOUNT_URL } from '@/constants/url.constants';
+import { useLang } from '@/language/useLang';
 import { asyncStoragePersistConfig } from '@/utils/storage.utils';
 
 interface UserStore {
@@ -65,36 +66,31 @@ export const useUser = () => {
   const isAuthenticated = useUserStore((state) => state.isAuthenticated);
   const setToken = useUserStore((state) => state.setToken);
   const logoutState = useUserStore((state) => state.logout);
-
+  const { t } = useLang();
   const logout = () => {
     queryClient.removeQueries({ queryKey: ['user-profile'] });
     Analytics.trackEvent(Prefix.System.default + 'logout');
     Analytics.reset();
     logoutState();
   };
-
   const deleteAccount = () => {
     Analytics.trackEvent(Prefix.System.default + 'delete_account');
-    Alert.alert(
-      'Eliminar cuenta',
-      '¿Estás seguro de que deseas eliminar tu cuenta?',
-      [
-        {
-          text: 'Cancelar',
-          style: 'cancel',
+    Alert.alert(t('deleteAccount'), t('deleteAccountDescription'), [
+      {
+        text: t('cancel'),
+        style: 'cancel',
+      },
+      {
+        text: t('deleteAccountConfirm'),
+        style: 'destructive',
+        onPress: () => {
+          Analytics.trackEvent(
+            Prefix.System.default + 'delete_account_confirmed',
+          );
+          Linking.openURL(DELETE_ACCOUNT_URL);
         },
-        {
-          text: 'Eliminar',
-          style: 'destructive',
-          onPress: () => {
-            Analytics.trackEvent(
-              Prefix.System.default + 'delete_account_confirmed',
-            );
-            Linking.openURL(DELETE_ACCOUNT_URL);
-          },
-        },
-      ],
-    );
+      },
+    ]);
   };
 
   return {

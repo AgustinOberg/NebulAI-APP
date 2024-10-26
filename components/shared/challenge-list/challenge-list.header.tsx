@@ -7,8 +7,8 @@ const ChallengeListHeader = () => {
   const { styles } = useStyles(stylesheet);
   return (
     <View style={styles.header}>
-      <Text weight="700" size={20}>
-        Mis desafíos
+      <Text weight="700" size={20} translate>
+        myChallenges
       </Text>
     </View>
   );

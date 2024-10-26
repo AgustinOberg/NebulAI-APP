@@ -10,12 +10,14 @@ import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
 import { useAttemptCarousel } from '@/hooks/attempt/useAttemptCarousel';
+import { useLang } from '@/language/useLang';
 import { getResults } from '@/utils/challenge.utils';
 
 const Results = () => {
   const { styles } = useStyles(stylesheet);
   const { answers, questions, seeResults } = useAttempt();
   const { reset: resetCarousel } = useAttemptCarousel();
+  const { t } = useLang();
   const results = useMemo(
     () => getResults(questions, answers),
     [questions, answers],
@@ -40,7 +42,9 @@ const Results = () => {
             animate={{ opacity: 1, translateY: 0 }}
             transition={{ type: 'timing', duration: 500, delay: 200 }}
           >
-            <Text size={16}>Tu resultado es...</Text>
+            <Text size={16} translate>
+              yourResults
+            </Text>
           </MotiView>
           <MotiView
             from={{ opacity: 0, translateY: -50, scale: 0.8 }}
@@ -58,9 +62,11 @@ const Results = () => {
           >
             <>
               <Text size={16} align="center">
-                Contestaste correctamente{' '}
-                <Text weight="800">{results.correctAnswers}</Text> de las{' '}
-                <Text weight="800">{results.totalQuestions}</Text> preguntas
+                {t('resultsDescription.answeredCorrectly')}{' '}
+                <Text weight="800">{results.correctAnswers}</Text>{' '}
+                {t('resultsDescription.outOf')}{' '}
+                <Text weight="800">{results.totalQuestions}</Text>{' '}
+                {t('resultsDescription.questions')}
               </Text>
             </>
           </MotiView>
@@ -76,11 +82,17 @@ const Results = () => {
           variant="tertiary"
           onPress={goToResponses}
           eventName="go_to_responses"
+          translate
         >
-          Ver respuestas
+          viewResponses
         </Button>
-        <Button variant="text" onPress={goToHome} eventName="finish_challenge">
-          Finalizar
+        <Button
+          variant="text"
+          onPress={goToHome}
+          eventName="finish_challenge"
+          translate
+        >
+          finish
         </Button>
       </MotiView>
     </View>

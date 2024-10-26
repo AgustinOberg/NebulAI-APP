@@ -6,10 +6,12 @@ import { Prefix } from '@/analytics/events';
 import { MAX_FILE_SIZE, MAX_FILE_SIZE_LABEL } from '@/constants/app.constants';
 import { useDocumentProcess } from '@/data/fetchers/document.fetcher';
 import { useChallengeState } from '@/data/state/challenge.context';
+import { useLang } from '@/language/useLang';
 
 export const useProcessFile = () => {
   const { mutate, reset } = useDocumentProcess();
   const { setFile } = useChallengeState();
+  const { t } = useLang();
   const processFile = async (file: DocumentPicker.DocumentPickerResult) => {
     setFile(file);
     return mutate(file);
@@ -37,8 +39,8 @@ export const useProcessFile = () => {
         error: 'File size exceeds the maximum limit',
       });
       showMessage({
-        message: 'El archivo seleccionado es demasiado grande',
-        description: `Máximo: ${MAX_FILE_SIZE_LABEL}`,
+        message: t('bigFileError'),
+        description: `${t('fileMax')} ${MAX_FILE_SIZE_LABEL}`,
         type: 'danger',
       });
       return;

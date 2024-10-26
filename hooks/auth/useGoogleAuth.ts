@@ -1,9 +1,9 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { useMutation } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 import { env } from '@/config/env';
 import { useAuthWithGoogle } from '@/data/fetchers/auth.fetcher';
+import { useLang } from '@/language/useLang';
 
 const setupGoogleSignIn = () => {
   GoogleSignin.configure({
@@ -20,26 +20,21 @@ export const useGoogleAuth = () => {
     setupGoogleSignIn();
   }, []);
 
-  const authWithGoogleMutation = useAuthWithGoogle();
-  const authenticateMutation = useMutation({
-    mutationFn: async () => {
-      const hasPlayServices = await GoogleSignin.hasPlayServices();
-      if (!hasPlayServices) {
-        return;
-      }
-      const response = await GoogleSignin.signIn();
-      const idToken = response.data?.idToken;
-      if (!idToken) {
-        return;
-      }
-      return authWithGoogleMutation.mutateAsync({ idToken });
-    },
-  });
-
-  const isLoading = authenticateMutation.isPending;
+  const { mutate: authWithGoogle, isPending: isLoading } = useAuthWithGoogle();
+  const { getCurrentLanguage } = useLang();
+  const authenticate = async () => {
+    const hasPlayServices = await GoogleSignin.hasPlayServices();
+    if (!hasPlayServices) {
+      return;
+    }
+    const response = await GoogleSignin.signIn();
+    const locale = await getCurrentLanguage();
+    const idToken = response.data?.idToken;
+    if (idToken) authWithGoogle({ idToken, locale });
+  };
 
   return {
-    authenticate: authenticateMutation.mutateAsync,
+    authenticate,
     isLoading,
   };
 };

@@ -4,12 +4,14 @@ import { showMessage } from 'react-native-flash-message';
 
 import { Analytics } from '@/analytics';
 import { Prefix } from '@/analytics/events';
+import { useLang } from '@/language/useLang';
 
 import { processDocument } from '../api/document.api';
 import { useChallengeState } from '../state/challenge.context';
 
 export const useDocumentProcess = () => {
   const { setContent } = useChallengeState();
+  const { t } = useLang();
   return useMutation({
     mutationFn: processDocument,
     mutationKey: ['processDocument'],
@@ -21,7 +23,7 @@ export const useDocumentProcess = () => {
       router.replace('/(app)/(challenge)/creation');
       Analytics.trackEvent(Prefix.System.default + 'process_document_error');
       showMessage({
-        message: 'Error al procesar el documento',
+        message: t('documentProcessError'),
         type: 'danger',
       });
     },
