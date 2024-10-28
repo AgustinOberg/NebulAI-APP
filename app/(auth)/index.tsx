@@ -14,7 +14,7 @@ import Nebu from '@/illustrations/nebu.illustration';
 import SpaceWithStars from '@/illustrations/space-with-stars.illustration';
 const AuthScreen = () => {
   const { styles } = useStyles(stylesheet);
-  const { authenticate } = useGoogleAuth();
+  const { authenticate, isLoading } = useGoogleAuth();
 
   return (
     <View style={styles.container}>
@@ -61,7 +61,8 @@ const AuthScreen = () => {
         <Button
           mode="gradient"
           eventName={Events.Actions.AUTH_BUTTON}
-          onPress={authenticate}
+          onPress={() => authenticate()}
+          loading={isLoading}
         >
           Iniciar sesión
         </Button>

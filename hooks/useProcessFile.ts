@@ -29,7 +29,7 @@ export const useProcessFile = () => {
       Analytics.trackEvent(Prefix.System.default + 'select_file_error', {
         error: 'No file selected',
       });
-      throw new Error('No file selected');
+      return;
     }
     const size = file.assets?.[0]?.size ?? 0;
     if (size >= MAX_FILE_SIZE) {
@@ -41,7 +41,7 @@ export const useProcessFile = () => {
         description: `Máximo: ${MAX_FILE_SIZE_LABEL}`,
         type: 'danger',
       });
-      throw new Error('File size exceeds the maximum limit');
+      return;
     }
     Analytics.trackEvent(Prefix.System.default + 'select_file', {
       file_size: size,
