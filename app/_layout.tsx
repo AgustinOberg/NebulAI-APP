@@ -1,5 +1,6 @@
 import 'react-native-reanimated';
 import '@/style/unistyles';
+import '@/language';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { SplashScreen, Stack } from 'expo-router';

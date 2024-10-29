@@ -31,6 +31,7 @@ interface ButtonProps extends PressableProps {
   eventName?: string;
   eventProperties?: Record<string, any>;
   loading?: boolean;
+  translate?: boolean;
 }
 
 const Button = ({
@@ -42,6 +43,7 @@ const Button = ({
   eventName,
   eventProperties,
   loading,
+  translate = false,
   ...rest
 }: ButtonProps) => {
   const { styles } = useStyles(stylesheet, { variant });
@@ -79,7 +81,7 @@ const Button = ({
       {loading ? (
         <ActivityIndicator size="small" color="#FFFFFF" />
       ) : (
-        <Text size={17} weight="700" {...textProps}>
+        <Text size={17} weight="700" {...textProps} translate={translate}>
           {children}
         </Text>
       )}

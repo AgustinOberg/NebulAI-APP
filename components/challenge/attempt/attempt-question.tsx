@@ -3,6 +3,7 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import type { ButtonVariant } from '@/components/ui/button';
 import Button from '@/components/ui/button';
+import { useLang } from '@/language/useLang';
 import type { Option } from '@/types/challenge';
 
 interface Props {
@@ -14,8 +15,9 @@ interface Props {
 
 const AttemptQuestion = ({ onPress, option, type }: Props) => {
   const { styles } = useStyles(stylesheet);
+  const { t } = useLang();
   const showFullText = () => {
-    Alert.alert('Opción', option.description, [
+    Alert.alert(t('option'), option.description, [
       {
         text: 'OK',
         style: 'default',

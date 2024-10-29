@@ -19,12 +19,11 @@ const ChallengeCreationPresentation = () => {
         <AstronautWaving />
       </MotiView>
       <View style={styles.content}>
-        <Text weight="700" size={30} align="center">
-          ¡Hola!, soy Nebu
+        <Text weight="700" size={30} align="center" translate>
+          nebuWelcome
         </Text>
-        <Text weight="300" size={17} align="center">
-          Estoy aquí para ayudarte a transformar tus archivos en preguntas
-          divertidas de opción múltiple.
+        <Text weight="300" size={17} align="center" translate>
+          nebuDescription
         </Text>
       </View>
     </>
