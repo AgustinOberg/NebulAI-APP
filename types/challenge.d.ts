@@ -4,6 +4,9 @@ export interface Challenge {
   totalTokens: number;
   difficulty: string;
   _id: string;
+  title: string;
+  description: string;
+  createdAt: string;
 }
 
 export interface Question {

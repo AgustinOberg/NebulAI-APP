@@ -29,6 +29,13 @@ export const useChallengeList = () => {
   });
 };
 
+export const useGetChallengeById = ({ id }: { id: string }) => {
+  return useQuery({
+    queryFn: () => getChallengeById(id),
+    queryKey: ['challenge', id],
+  });
+};
+
 export const useChallengeById = () => {
   return useMutation({
     mutationFn: getChallengeById,

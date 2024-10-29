@@ -8,6 +8,9 @@ import FlashMessage from 'react-native-flash-message';
 export { ErrorBoundary } from 'expo-router';
 import '@/config/error/sentry.credentials';
 
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import SentryAppWrap from '@/config/error/sentry.config';
 import { queryClient } from '@/config/query.config';
 import { useSplashScreen } from '@/hooks/useSplashScreen';
@@ -36,8 +39,12 @@ const App = () => {
 function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
-      <App />
-      <FlashMessage position="bottom" />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <BottomSheetModalProvider>
+          <App />
+          <FlashMessage position="bottom" />
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </QueryClientProvider>
   );
 }
