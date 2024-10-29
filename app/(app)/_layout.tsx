@@ -14,6 +14,7 @@ const _layout = () => {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(tabs)" />
       <Stack.Screen name="(challenge)" />
+      <Stack.Screen name="language" />
       <Stack.Screen
         name="about"
         options={{ presentation: 'transparentModal', animation: 'fade' }}

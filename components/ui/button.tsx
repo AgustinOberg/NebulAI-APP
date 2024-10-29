@@ -30,6 +30,7 @@ interface ButtonProps extends PressableProps {
   textProps?: TextProps;
   eventName?: string;
   eventProperties?: Record<string, any>;
+  translate?: boolean;
   loading?: boolean;
 }
 
@@ -41,6 +42,7 @@ const Button = ({
   textProps,
   eventName,
   eventProperties,
+  translate = false,
   loading,
   ...rest
 }: ButtonProps) => {
@@ -76,10 +78,11 @@ const Button = ({
       ) : (
         <View style={[styles.buttonChildren, styles.fill, containerStyle]} />
       )}
+      <>
       {loading ? (
         <ActivityIndicator size="small" color="#FFFFFF" />
       ) : (
-        <Text size={17} weight="700" {...textProps}>
+        <Text size={17} weight="700" {...textProps} translate={translate}>
           {children}
         </Text>
       )}

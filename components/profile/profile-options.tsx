@@ -17,26 +17,32 @@ type Option = {
 };
 
 const useProfileOptions = () => {
-  const { requestReview, sendComments, goToAbout } = useAppFeedback();
+  const { requestReview, sendComments, goToAbout, goToLanguage } =
+    useAppFeedback();
   const options: Option[] = useMemo(
     () => [
       {
-        label: 'Sobre Nebulai',
+        label: 'about',
         icon: 'info',
         action: goToAbout,
       },
       {
-        label: 'Valorar',
+        label: 'rate',
         icon: 'star',
         action: requestReview,
       },
       {
-        label: 'Enviar comentarios',
+        label: 'sendComments',
         icon: 'message-square',
         action: sendComments,
       },
+      {
+        label: 'language',
+        icon: 'map-pin',
+        action: goToLanguage,
+      },
     ],
-    [goToAbout, requestReview, sendComments],
+    [goToAbout, requestReview, sendComments, goToLanguage],
   );
   return {
     options,
@@ -60,7 +66,9 @@ const ProfileOptions = () => {
     ({ item }: { item: Option }) => (
       <Pressable onPress={() => onPressOption(item)} style={styles.option}>
         <Feather name={item.icon} size={20} color={'white'} />
-        <Text size={17}>{item.label}</Text>
+        <Text size={17} translate>
+          {item.label}
+        </Text>
       </Pressable>
     ),
     [onPressOption, styles],

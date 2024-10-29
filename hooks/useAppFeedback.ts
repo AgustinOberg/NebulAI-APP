@@ -17,9 +17,14 @@ export const useAppFeedback = () => {
     router.push('/about');
   };
 
+  const goToLanguage = () => {
+    router.push('/language');
+  };
+
   return {
     requestReview,
     sendComments,
     goToAbout,
+    goToLanguage,
   };
 };

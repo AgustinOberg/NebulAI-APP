@@ -12,10 +12,11 @@ import { TERMS_URL } from '@/constants/url.constants';
 import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
 import Nebu from '@/illustrations/nebu.illustration';
 import SpaceWithStars from '@/illustrations/space-with-stars.illustration';
+import { useLang } from '@/language/useLang';
 const AuthScreen = () => {
   const { styles } = useStyles(stylesheet);
+  const { t } = useLang();
   const { authenticate, isLoading } = useGoogleAuth();
-
   return (
     <View style={styles.container}>
       <AnimatedStars color="white" quantity={30} />
@@ -46,8 +47,8 @@ const AuthScreen = () => {
             animate={{ opacity: 1, translateY: 0 }}
             transition={{ type: 'timing', duration: 1000, delay: 1500 }}
           >
-            <Text size={16} weight="500" style={styles.title}>
-              ¡Conquista el conocimiento!
+            <Text size={16} weight="500" style={styles.title} translate>
+              slogan
             </Text>
           </MotiView>
         </View>
@@ -61,10 +62,11 @@ const AuthScreen = () => {
         <Button
           mode="gradient"
           eventName={Events.Actions.AUTH_BUTTON}
+          translate
           onPress={() => authenticate()}
           loading={isLoading}
         >
-          Iniciar sesión
+          login
         </Button>
         <MotiView
           style={styles.terms}
@@ -73,10 +75,10 @@ const AuthScreen = () => {
           transition={{ type: 'timing', duration: 1000, delay: 2000 }}
         >
           <Text size={13} align="center">
-            Al iniciar sesión, aceptas los{' '}
+            {t('loginTerms')}
             <Link href={TERMS_URL}>
               <Text size={13} weight="700" align="center">
-                Términos y Condiciones de uso
+                {t('terms')}
               </Text>
             </Link>
           </Text>
@@ -135,5 +137,9 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
   terms: {
     marginTop: 10,
     opacity: 0.6,
+  },
+  button: {
+    width: 200,
+    height: 44,
   },
 }));

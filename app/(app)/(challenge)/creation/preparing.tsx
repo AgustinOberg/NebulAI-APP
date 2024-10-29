@@ -9,11 +9,7 @@ import Text from '@/components/ui/text';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
 import { useAutoChallengeCreation } from '@/hooks/useAutoChallengeCreation';
 
-const LOADING_TEXTS = [
-  '🚀 Encendiendo los motores...',
-  '🌌Despegando hacia el conocimiento...',
-  '🔭 Explorando nuevas galaxias de preguntas...',
-];
+const LOADING_TEXTS = ['loading0', 'loading1', 'loading2'];
 
 const PreparingScreen = () => {
   const { styles } = useStyles(stylesheet);
@@ -30,8 +26,14 @@ const PreparingScreen = () => {
       </View>
       <View style={styles.screenContainer}>
         <View>
-          <Text color="secondary" size={30} weight="700" align="center">
-            Preparando tu Misión
+          <Text
+            color="secondary"
+            size={30}
+            weight="700"
+            align="center"
+            translate
+          >
+            preparingMission
           </Text>
 
           <FlatList
@@ -44,7 +46,7 @@ const PreparingScreen = () => {
                 delay={(index + 0.5) * 2500}
                 style={styles.item}
               >
-                <Text color="secondary" size={20} numberOfLines={2}>
+                <Text color="secondary" size={20} numberOfLines={2} translate>
                   {item}
                 </Text>
               </MotiView>
@@ -61,7 +63,9 @@ const PreparingScreen = () => {
             }}
           >
             <Spinner size="small" />
-            <Text color="secondary">Creando tu desafío...</Text>
+            <Text color="secondary" translate>
+              loadingMore
+            </Text>
           </MotiView>
         </View>
       </View>

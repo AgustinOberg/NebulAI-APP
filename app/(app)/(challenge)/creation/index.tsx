@@ -41,12 +41,13 @@ const AttemptCreationScreen = () => {
               mode="gradient"
               onPress={handleSelect}
               eventName="attempt_creation_select_file"
+              translate
             >
-              Elegir Archivo
+              chooseFile
             </Button>
           </MotiView>
-          <Text align="center" size={13} color="disabled">
-            *Solo se aceptan archivos con extensión .pdf
+          <Text align="center" size={13} color="disabled" translate>
+            fileWarning
           </Text>
         </View>
       </View>

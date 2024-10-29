@@ -7,6 +7,8 @@ import { Text as RNText } from 'react-native';
 import type { UnistylesVariants } from 'react-native-unistyles';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
+import { useLang } from '@/language/useLang';
+
 type ComponentProps = UnistylesVariants<typeof stylesheet>;
 
 export interface TextProps extends RNTextProps {
@@ -16,6 +18,7 @@ export interface TextProps extends RNTextProps {
   style?: StyleProp<TextStyle>;
   size?: number;
   align?: 'left' | 'center' | 'right';
+  translate?: boolean;
 }
 
 const Text = ({
@@ -25,12 +28,14 @@ const Text = ({
   children,
   size = 16,
   align = 'left',
+  translate = false,
   ...rest
 }: TextProps) => {
   const { styles } = useStyles(stylesheet, {
     weight,
     color,
   });
+  const { t } = useLang();
 
   return (
     <>
@@ -38,7 +43,7 @@ const Text = ({
         style={[styles.text(size), style, { textAlign: align }]}
         {...rest}
       >
-        {children}
+        {translate ? t(children as string) : children}
       </RNText>
     </>
   );
