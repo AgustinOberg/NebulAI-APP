@@ -37,7 +37,6 @@ const storeApi: StateCreator<UserStore, [['zustand/immer', never]]> = (
   // Methods
   setToken: (token) => {
     set((state) => {
-      GoogleSignin.signOut();
       state.token = token;
       state.isAuthenticated = true;
     });

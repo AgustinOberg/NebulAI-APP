@@ -15,8 +15,8 @@ import SpaceWithStars from '@/illustrations/space-with-stars.illustration';
 import { useLang } from '@/language/useLang';
 const AuthScreen = () => {
   const { styles } = useStyles(stylesheet);
-  const { authenticate } = useGoogleAuth();
   const { t } = useLang();
+  const { authenticate, isLoading } = useGoogleAuth();
   return (
     <View style={styles.container}>
       <AnimatedStars color="white" quantity={30} />
@@ -62,8 +62,9 @@ const AuthScreen = () => {
         <Button
           mode="gradient"
           eventName={Events.Actions.AUTH_BUTTON}
-          onPress={authenticate}
           translate
+          onPress={() => authenticate()}
+          loading={isLoading}
         >
           login
         </Button>

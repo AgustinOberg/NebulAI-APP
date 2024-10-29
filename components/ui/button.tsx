@@ -7,7 +7,7 @@ import type {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import { Pressable, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import { Analytics } from '@/analytics';
@@ -21,6 +21,7 @@ export type ButtonVariant =
   | 'text'
   | 'tertiary'
   | 'success';
+
 interface ButtonProps extends PressableProps {
   children: React.ReactNode;
   mode?: 'solid' | 'gradient';
@@ -30,6 +31,7 @@ interface ButtonProps extends PressableProps {
   eventName?: string;
   eventProperties?: Record<string, any>;
   translate?: boolean;
+  loading?: boolean;
 }
 
 const Button = ({
@@ -41,6 +43,7 @@ const Button = ({
   eventName,
   eventProperties,
   translate = false,
+  loading,
   ...rest
 }: ButtonProps) => {
   const { styles } = useStyles(stylesheet, { variant });
@@ -57,8 +60,14 @@ const Button = ({
     },
     [eventName, eventProperties, rest],
   );
+
   return (
-    <Pressable style={styles.container} {...rest} onPressIn={onPressIn}>
+    <Pressable
+      style={styles.container}
+      {...rest}
+      onPressIn={onPressIn}
+      disabled={loading || rest.disabled}
+    >
       {mode === 'gradient' ? (
         <LinearGradient
           colors={['#7F00FF', '#DC00FC']}
@@ -70,10 +79,13 @@ const Button = ({
         <View style={[styles.buttonChildren, styles.fill, containerStyle]} />
       )}
       <>
+      {loading ? (
+        <ActivityIndicator size="small" color="#FFFFFF" />
+      ) : (
         <Text size={17} weight="700" {...textProps} translate={translate}>
           {children}
         </Text>
-      </>
+      )}
     </Pressable>
   );
 };
