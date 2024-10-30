@@ -11,7 +11,8 @@ export const useAttempt = () => {
   const setMode = useAttemptStore((state) => state.setMode);
   const mode = useAttemptStore((state) => state.mode);
   const questions = useAttemptStore((state) => state.questions);
-  const challengeId = useAttemptStore((state) => state.challengeId);
+  //const challengeId = useAttemptStore((state) => state.challengeId);
+  const stateChallenge = useAttemptStore((state) => state.challenge);
   const setChallenge = useAttemptStore((state) => state.setChallenge);
   const { mutateAsync: getAttempt, variables, isPending } = useChallengeById();
 
@@ -25,8 +26,9 @@ export const useAttempt = () => {
     router.replace('/(challenge)/attempt');
   };
 
-  const seeResults = (challenge?: Challenge) => {
-    setMode({ mode: 'view', challenge, answers });
+  const seeResults = (challenge?: Challenge, userAnswers?: string[]) => {
+    console.log({ challenge, userAnswers });
+    setMode({ mode: 'view', challenge, answers: userAnswers });
     router.replace('/(challenge)/attempt');
   };
 
@@ -34,9 +36,9 @@ export const useAttempt = () => {
     questions,
     answers,
     completeQuestion,
-    challengeId,
     startAttempt,
     resetAttempt,
+    challenge: stateChallenge,
     seeResults,
     mode,
     attemptById: {

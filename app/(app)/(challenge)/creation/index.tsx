@@ -18,9 +18,11 @@ const AttemptCreationScreen = () => {
   const { setDifficulty } = useChallengeState();
 
   const handleSelect = useCallback(async () => {
-    await selectFile();
-    setDifficulty(0);
-    router.replace('/(app)/(challenge)/creation/choose-difficulty');
+    try {
+      await selectFile();
+      setDifficulty(0);
+      router.replace('/(app)/(challenge)/creation/choose-difficulty');
+    } catch (error) {}
   }, [selectFile, setDifficulty]);
 
   return (

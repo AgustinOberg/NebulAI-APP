@@ -7,6 +7,7 @@ import Button from '@/components/ui/button';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
 import { useAttemptCarousel } from '@/hooks/attempt/useAttemptCarousel';
 import type { Question } from '@/types/challenge';
+import { isQuestionCompleted } from '@/utils/challenge.utils';
 
 import AttemptSlide from './attempt-slide';
 const { width } = Dimensions.get('window');
@@ -21,8 +22,9 @@ const AttemptCarousel = () => {
     currentQuestionIndex,
   } = useAttemptCarousel();
   const { questions, answers } = useAttempt();
+  console.log({ questions });
   const isCompleted = useMemo(
-    () => Object.keys(answers).includes(questions[currentQuestionIndex]._id),
+    () => isQuestionCompleted(questions[currentQuestionIndex], answers),
     [answers, currentQuestionIndex, questions],
   );
 

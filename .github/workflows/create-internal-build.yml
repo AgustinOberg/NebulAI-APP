@@ -1,0 +1,98 @@
+name: '📦 Create internal build'
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to submit (ios or android)'
+        required: true
+        type: choice
+        options:
+          - ios
+          - android
+      profile:
+        description: 'Environment'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      app_version:
+        description: 'App version to submit'
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: Install and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 💯 Check for EXPO_TOKEN
+        run: |
+          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
+            echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
+            exit 1
+          fi
+
+      - name: 💯 Check for ENV_FILE_DEVELOPMENT
+        run: |
+          if [ -z "${{ secrets.ENV_FILE_DEVELOPMENT }}" ]; then
+            echo "You must provide an ENV_FILE_DEVELOPMENT secret linked to this project"
+            exit 1
+          fi
+
+      - name: 💯 Check for ENV_FILE_PRODUCTION
+        run: |
+          if [ -z "${{ secrets.ENV_FILE_PRODUCTION }}" ]; then
+            echo "You must provide an ENV_FILE_PRODUCTION secret linked to this project"
+            exit 1
+          fi
+
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: ⚡️ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: 🙆🏼‍♂️ Update package.json version
+        run: |
+          NEW_VERSION=${{ github.event.inputs.app_version }}
+          echo "Updating package.json to version $NEW_VERSION"
+          bun run npm version $NEW_VERSION --no-git-tag-version
+      - name: 🙆🏼‍♂️ Verify updated version
+        run: cat package.json
+
+      - name: ⚡️ Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Create env file
+        run: |
+          echo "${{ secrets.ENV_FILE_DEVELOPMENT }}" > .env.staging
+          echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env.production
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Upload Secrets
+        run: ./deploy_secrets.sh ${{ github.event.inputs.profile }}
+
+      - name: 📱 Run Build
+        run: APP_VERSION=${{github.event.inputs.app_version}} eas build --platform ${{github.event.inputs.platform}} --profile ${{github.event.inputs.profile}}-preview --non-interactive --json > build_output.json
+
+      - name: 🛠️ Install jq
+        run: sudo apt-get install -y jq
+
+      - name: 🖨️ Print build_output.json
+        run: cat build_output.json
+
+      - name: 🔍 Extract BuildID
+        run: |
+          BUILD_ID=$(jq -r '.[0].id' build_output.json)
+          echo "Build ID is $BUILD_ID"
+          echo "BUILD_ID=$BUILD_ID" >> $GITHUB_ENV
+
+      ## Run slack or other notification here

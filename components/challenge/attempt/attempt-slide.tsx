@@ -47,7 +47,7 @@ const AttemptSlide = ({ style, currentQuestion }: Props) => {
         data={currentQuestion.options}
         ItemSeparatorComponent={Separator}
         renderItem={({ item, index }) => {
-          const isChosen = answers[currentQuestion._id] === item._id;
+          const isChosen = answers.includes(item._id);
           const isCorrect = item.isCorrect;
           return (
             <AttemptQuestion
@@ -55,7 +55,7 @@ const AttemptSlide = ({ style, currentQuestion }: Props) => {
               delay={index * 1000}
               onPress={() => {
                 if (mode === 'view') return;
-                completeQuestion(currentQuestion._id, item._id);
+                completeQuestion(item._id, currentQuestion);
               }}
               type={getAttemptType(mode, isChosen, isCorrect)}
             />

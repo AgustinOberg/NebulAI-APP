@@ -15,7 +15,7 @@ import { getResults } from '@/utils/challenge.utils';
 
 const Results = () => {
   const { styles } = useStyles(stylesheet);
-  const { answers, questions, seeResults } = useAttempt();
+  const { answers, questions, seeResults, challenge } = useAttempt();
   const { reset: resetCarousel } = useAttemptCarousel();
   const { t } = useLang();
   const results = useMemo(
@@ -29,7 +29,7 @@ const Results = () => {
 
   const goToResponses = () => {
     resetCarousel();
-    seeResults();
+    seeResults(challenge, answers);
   };
 
   return (

@@ -10,8 +10,10 @@ export { ErrorBoundary } from 'expo-router';
 import '@/config/error/sentry.credentials';
 
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import SandboxLabel from '@/components/shared/sandbox-label';
 import SentryAppWrap from '@/config/error/sentry.config';
 import { queryClient } from '@/config/query.config';
 import { useSplashScreen } from '@/hooks/useSplashScreen';
@@ -40,8 +42,9 @@ const App = () => {
 function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={styles.gestureHandler}>
         <BottomSheetModalProvider>
+          <SandboxLabel />
           <App />
           <FlashMessage position="bottom" />
         </BottomSheetModalProvider>
@@ -51,3 +54,9 @@ function RootLayout() {
 }
 
 export default SentryAppWrap(RootLayout);
+
+const styles = StyleSheet.create({
+  gestureHandler: {
+    flex: 1,
+  },
+});

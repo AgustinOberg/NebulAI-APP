@@ -1,16 +1,16 @@
+import { Feather } from '@expo/vector-icons';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { format } from 'date-fns';
 import { useCallback } from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
 import { useAttemptByChallengeId } from '@/data/fetchers/attempt.fetcher';
 import { useGetChallengeById } from '@/data/fetchers/challenge.fetcher';
+import { useAttempt } from '@/hooks/attempt/useAttempt';
 import { hex2rgba } from '@/utils/ui.utils';
-
-import ChallengeStar from './challenge-star';
 
 interface Props {
   challengeId: string;
@@ -19,7 +19,7 @@ interface Props {
 const ChallengeAttempts = ({ goBack, challengeId }: Props) => {
   const { styles } = useStyles(stylesheet);
   const { data: challenge } = useGetChallengeById({ id: challengeId });
-
+  const { seeResults } = useAttempt();
   const { data: attempts } = useAttemptByChallengeId({
     challengeId: challengeId,
   });
@@ -56,7 +56,10 @@ const ChallengeAttempts = ({ goBack, challengeId }: Props) => {
       contentContainerStyle={styles.content}
       ListFooterComponent={footer}
       renderItem={({ item }) => (
-        <View style={styles.item}>
+        <Pressable
+          style={styles.item}
+          onPress={() => seeResults(challenge, item.answers)}
+        >
           <View>
             <Text weight="800" size={19}>
               {`${item.score}%`}
@@ -65,8 +68,8 @@ const ChallengeAttempts = ({ goBack, challengeId }: Props) => {
               {format(new Date(item.createdAt), 'dd/MM/yyyy')}
             </Text>
           </View>
-          <ChallengeStar rating={challenge?.difficulty || '1'} />
-        </View>
+          <Feather name="chevron-right" size={24} color="#FFFFFF" />
+        </Pressable>
       )}
     />
   );
@@ -90,6 +93,7 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
     justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderBottomColor: hex2rgba('#FFFFFF', 0.2),
+    alignItems: 'center',
   },
   back: {
     position: 'absolute',

@@ -10,14 +10,16 @@ import Star from '@/animations/components/star';
 import CloseTab from '@/components/shared/close-tab';
 import Button from '@/components/ui/button';
 import Text from '@/components/ui/text';
+import { useUserProfile } from '@/data/fetchers/auth.fetcher';
 import { useChallengeState } from '@/data/state/challenge.context';
+import { isOldUser } from '@/utils/user.utils';
 
 const ANIMATION_HEIGHT = 400;
 
 const ChooseDifficulty = () => {
   const { styles } = useStyles(stylesheet);
   const { setDifficulty, difficulty, file } = useChallengeState();
-
+  const { data: user } = useUserProfile();
   const onSelectStar = (star: number) => {
     Analytics.trackEvent(Prefix.Actions.Press + 'select_difficulty', {
       difficulty: star,
@@ -30,7 +32,7 @@ const ChooseDifficulty = () => {
   };
   return (
     <>
-      <CloseTab />
+      {isOldUser(user) && <CloseTab />}
       <View style={styles.animationContainer}>
         <SpaceRide />
       </View>

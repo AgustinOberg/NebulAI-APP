@@ -14,7 +14,10 @@ export const useCreateAttempt = () => {
       createAttempt({
         answers: Object.values(answers),
         challenge: challengeId!,
-        score: parseInt(getResults(questions, answers).percentage, 10),
+        score: parseInt(
+          getResults(questions, answers).percentage.toString(),
+          10,
+        ),
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({
