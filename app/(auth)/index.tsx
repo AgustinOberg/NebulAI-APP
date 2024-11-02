@@ -39,7 +39,7 @@ const AuthScreen = () => {
             transition={{ type: 'timing', duration: 1000, delay: 1000 }}
           >
             <Text size={42} weight="700" style={styles.title}>
-              Nebulai
+              Nebulai - Agu
             </Text>
           </MotiView>
           <MotiView
