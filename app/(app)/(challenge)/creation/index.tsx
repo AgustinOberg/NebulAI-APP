@@ -18,9 +18,11 @@ const AttemptCreationScreen = () => {
   const { setDifficulty } = useChallengeState();
 
   const handleSelect = useCallback(async () => {
-    await selectFile();
-    setDifficulty(0);
-    router.replace('/(app)/(challenge)/creation/choose-difficulty');
+    try {
+      await selectFile();
+      setDifficulty(0);
+      router.replace('/(app)/(challenge)/creation/choose-difficulty');
+    } catch (error) {}
   }, [selectFile, setDifficulty]);
 
   return (
@@ -41,12 +43,13 @@ const AttemptCreationScreen = () => {
               mode="gradient"
               onPress={handleSelect}
               eventName="attempt_creation_select_file"
+              translate
             >
-              Elegir Archivo
+              chooseFile
             </Button>
           </MotiView>
-          <Text align="center" size={13} color="disabled">
-            *Solo se aceptan archivos con extensión .pdf
+          <Text align="center" size={13} color="disabled" translate>
+            fileWarning
           </Text>
         </View>
       </View>

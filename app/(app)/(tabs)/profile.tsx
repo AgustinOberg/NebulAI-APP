@@ -15,12 +15,11 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <ScreenBackground />
-
       <ProfileHeader />
       <ProfileOptions />
       <View style={styles.footer}>
-        <Button variant="text" onPress={logout}>
-          Cerrar sesión
+        <Button variant="text" onPress={logout} translate>
+          logout
         </Button>
       </View>
       <Feather

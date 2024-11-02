@@ -2,9 +2,21 @@ import { router } from 'expo-router';
 import * as StoreReview from 'expo-store-review';
 import { Linking, Platform } from 'react-native';
 
+const androidPackageName = 'com.agustinoberg.nebulai';
+
+const openPlaystoreReview = () =>
+  Linking.openURL(
+    `https://play.google.com/store/apps/details?id=${androidPackageName}&showAllReviews=true`,
+  );
+
 export const useAppFeedback = () => {
   const requestReview = () => {
-    StoreReview.requestReview();
+    if (Platform.OS === 'ios') {
+      return StoreReview.requestReview();
+    }
+    if (Platform.OS === 'android') {
+      return openPlaystoreReview();
+    }
   };
 
   const sendComments = () => {
@@ -17,9 +29,14 @@ export const useAppFeedback = () => {
     router.push('/about');
   };
 
+  const goToLanguage = () => {
+    router.push('/language');
+  };
+
   return {
     requestReview,
     sendComments,
     goToAbout,
+    goToLanguage,
   };
 };

@@ -1,7 +1,7 @@
-import { useNavigationContainerRef } from "expo-router";
-import { useEffect } from "react";
+import { useNavigationContainerRef } from 'expo-router';
+import { useEffect } from 'react';
 
-import { routingInstrumentation } from "./sentry.config";
+import { routingInstrumentation } from './sentry.config';
 
 export const useSentryRouter = () => {
   const ref = useNavigationContainerRef();

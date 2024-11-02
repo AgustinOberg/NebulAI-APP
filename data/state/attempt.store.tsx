@@ -13,22 +13,19 @@ export type AttemptMode = 'new' | 'view';
 type ModeArgs = {
   mode: AttemptMode;
   challenge?: Challenge;
-  answers?: {
-    [questionId: string]: string;
-  };
+  answers?: string[];
 };
 interface AttemptState {
   // Properties
   questions: Question[];
   challengeId?: string;
+  challenge?: Challenge;
   mode: AttemptMode;
-  answers: {
-    [questionId: string]: string;
-  };
+  answers: string[];
   // Methods
   setChallenge: (challenge: Challenge) => void;
   setMode: (args: ModeArgs) => void;
-  completeQuestion: (questionId: string, answerId: string) => void;
+  completeQuestion: (answerId: string, question: Question) => void;
   reset: () => void;
 }
 
@@ -38,32 +35,43 @@ const storeApi: StateCreator<AttemptState, [['zustand/immer', never]]> = (
   // Properties
   mode: 'new',
   questions: [],
-  answers: {},
+  answers: [],
   challengeId: undefined,
+  challenge: undefined,
 
   // Methods
   setChallenge: (challenge) => {
     set((state) => {
       state.questions = challenge.questions;
       state.challengeId = challenge._id;
+      state.challenge = challenge;
     });
   },
-  completeQuestion: (questionId, answerId) => {
+  completeQuestion: (answerId, question) => {
     set((state) => {
-      state.answers[questionId] = answerId;
+      const alreadyCompleted = question.options.find((o) =>
+        state.answers.includes(o._id),
+      );
+      if (alreadyCompleted) {
+        state.answers = state.answers.filter((a) => a !== alreadyCompleted._id);
+        state.answers.push(answerId);
+      } else {
+        state.answers.push(answerId);
+      }
     });
   },
   setMode: ({ mode, challenge, answers }) => {
     set((state) => {
       state.mode = mode;
       state.challengeId = challenge?._id;
+      state.questions = challenge?.questions || [];
       if (answers) state.answers = answers;
     });
   },
   reset: () => {
     set((state) => {
       state.questions = [];
-      state.answers = {};
+      state.answers = [];
       state.mode = 'new';
     });
   },
