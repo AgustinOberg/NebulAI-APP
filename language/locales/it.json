@@ -41,5 +41,12 @@
   "deleteAccount": "Elimina account",
   "deleteAccountDescription": "Sei sicuro di voler eliminare il tuo account?",
   "deleteAccountConfirm": "Elimina",
-  "cancel": "Annulla"
+  "cancel": "Annulla",
+  "update": {
+    "title": "Nuovo aggiornamento!",
+    "description": "Cose incredibili sono atterrate",
+    "cta": "Aggiorna ora"
+  },
+  "tryAgain": "Riprovare",
+  "seeAttempts": "Vedi tentativi"
 }

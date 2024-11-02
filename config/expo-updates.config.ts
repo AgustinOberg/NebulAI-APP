@@ -14,20 +14,26 @@ export const useExpoUpdates = () => {
     try {
       const update = await Updates.checkForUpdateAsync();
       setUpdates(update.isAvailable, update.manifest?.id);
-      if (update.isAvailable) {
-        await Updates.fetchUpdateAsync();
-        await Updates.reloadAsync();
-      }
     } catch (error) {
       console.error(`Error fetching latest Expo update: ${error}`);
     }
   }
+
+  const applyUpdate = async () => {
+    try {
+      await Updates.fetchUpdateAsync();
+      await Updates.reloadAsync();
+    } catch (error) {
+      console.error(`Error fetching latest Expo update: ${error}`);
+    }
+  };
 
   useEffect(() => {
     onFetchUpdateAsync();
   }, [appState]);
 
   return {
-    isLoading: updatesAvailables,
+    updatesAvailables,
+    applyUpdate,
   };
 };

@@ -14,6 +14,7 @@ import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import SandboxLabel from '@/components/shared/sandbox-label';
+import UpdateAlert from '@/components/shared/update-alert';
 import SentryAppWrap from '@/config/error/sentry.config';
 import { queryClient } from '@/config/query.config';
 import { useSplashScreen } from '@/hooks/useSplashScreen';
@@ -45,6 +46,7 @@ function RootLayout() {
       <GestureHandlerRootView style={styles.gestureHandler}>
         <BottomSheetModalProvider>
           <SandboxLabel />
+          <UpdateAlert />
           <App />
           <FlashMessage position="bottom" />
         </BottomSheetModalProvider>

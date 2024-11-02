@@ -41,5 +41,12 @@
   "deleteAccount": "Delete account",
   "deleteAccountDescription": "Are you sure you want to delete your account?",
   "deleteAccountConfirm": "Delete",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "update": {
+    "title": "New update!",
+    "description": "Amazing new things have landed",
+    "cta": "Update now"
+  },
+  "tryAgain": "Try again",
+  "seeAttempts": "See attempts"
 }
