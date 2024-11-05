@@ -12,7 +12,7 @@
   "nebuWelcome": "¡Hola! Soy Nebu",
   "nebuDescription": "Estoy aquí para ayudarte a transformar tus archivos en divertidas preguntas de opción múltiple.",
   "chooseFile": "Seleccionar archivo",
-  "fileWarning": "*Solo se aceptan archivos con extensión .pdf",
+  "fileWarning": "*Archivos adminitos: ",
   "chooseDifficulty": "¿Qué tan difícil quieres que sea el desafío?",
   "next": "Siguiente",
   "preparingMission": "Preparando tu misión...",

@@ -4,6 +4,7 @@ import { showMessage } from 'react-native-flash-message';
 import { Analytics } from '@/analytics';
 import { Prefix } from '@/analytics/events';
 import { MAX_FILE_SIZE, MAX_FILE_SIZE_LABEL } from '@/constants/app.constants';
+import { useAvailableFileTypes } from '@/data/fetchers/config.fetcher';
 import { useDocumentProcess } from '@/data/fetchers/document.fetcher';
 import { useChallengeState } from '@/data/state/challenge.context';
 import { useLang } from '@/language/useLang';
@@ -12,6 +13,8 @@ export const useProcessFile = () => {
   const { mutate, reset } = useDocumentProcess();
   const { setFile } = useChallengeState();
   const { t } = useLang();
+  const { data: availableFileTypes } = useAvailableFileTypes();
+  const mimeType = availableFileTypes?.map((e) => e.mimeType) ?? [];
   const processFile = async (file: DocumentPicker.DocumentPickerResult) => {
     setFile(file);
     return mutate(file);
@@ -20,7 +23,7 @@ export const useProcessFile = () => {
   const pickFile = async () => {
     Analytics.trackEvent(Prefix.System.default + 'pick_file');
     const file = await DocumentPicker.getDocumentAsync({
-      type: 'application/pdf',
+      type: mimeType,
     });
     return file;
   };

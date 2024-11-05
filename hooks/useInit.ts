@@ -1,5 +1,6 @@
 import { useSentryRouter } from '@/config/error/useSentryRouter';
 import { useUserProfile } from '@/data/fetchers/auth.fetcher';
+import { useAvailableFileTypes } from '@/data/fetchers/config.fetcher';
 import { useSetUserLang } from '@/language/useSetUserLang';
 
 import { useLoadFonts } from './useLoadFonts';
@@ -10,6 +11,7 @@ export const useInit = () => {
   useSentryRouter();
   useTrackScreens();
   useSetUserLang();
+  useAvailableFileTypes();
   const { isLoading: isUserProfileLoading } = useUserProfile();
 
   return {
