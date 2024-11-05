@@ -25,6 +25,8 @@ export default {
       },
       package: 'com.agustinoberg.nebulai',
       versionCode: 10,
+      googleServicesFile:
+        process.env.GOOGLE_SERVICES_JSON || './config/google-services.json',
     },
     plugins: [
       'expo-router',
