@@ -12,7 +12,7 @@
   "nebuWelcome": "Ciao! Sono Nebu",
   "nebuDescription": "Sono qui per aiutarti a trasformare i tuoi file in divertenti domande a scelta multipla.",
   "chooseFile": "Scegli un file",
-  "fileWarning": "*Sono accettati solo file con estensione .pdf",
+  "fileWarning": "*File accettati: ",
   "chooseDifficulty": "Quanto difficile vuoi che sia la sfida?",
   "next": "Avanti",
   "preparingMission": "Preparando la tua missione...",
@@ -41,5 +41,12 @@
   "deleteAccount": "Elimina account",
   "deleteAccountDescription": "Sei sicuro di voler eliminare il tuo account?",
   "deleteAccountConfirm": "Elimina",
-  "cancel": "Annulla"
+  "cancel": "Annulla",
+  "update": {
+    "title": "Nuovo aggiornamento!",
+    "description": "Cose incredibili sono atterrate",
+    "cta": "Aggiorna ora"
+  },
+  "tryAgain": "Riprovare",
+  "seeAttempts": "Vedi tentativi"
 }

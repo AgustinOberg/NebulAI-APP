@@ -40,3 +40,9 @@ export const getUserProfile = async () => {
   }
   return data;
 };
+
+export const setUserPushNotification = async ({ token }: { token: string }) => {
+  await privateApi.post('/auth/push-notification', {
+    token,
+  });
+};
