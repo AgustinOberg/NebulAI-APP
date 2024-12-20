@@ -7,7 +7,7 @@ const UploadHeader = () => {
   const { styles } = useStyles(stylesheet);
   return (
     <View style={styles.container}>
-      <Text weight={800} style={styles.title}>
+      <Text weight={'800'} style={styles.title}>
         Añade archivo
       </Text>
     </View>

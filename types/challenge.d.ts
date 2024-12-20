@@ -1,29 +1,32 @@
+export interface MinChallenge {
+  title: string;
+  description: string;
+  difficulty: string;
+  createdAt: number;
+  id: string;
+}
+
 export interface Challenge {
-  questions: Question[];
+  id: string;
+  title: string;
+  description: string;
   provider: string;
   totalTokens: number;
   difficulty: string;
-  _id: string;
-  title: string;
-  description: string;
-  createdAt: string;
+  ownerId: string;
+  language: string;
+  createdAt: number;
+  questions: Question[];
 }
 
 export interface Question {
+  id: string;
   question: string;
   options: Option[];
-  _id: string;
 }
 
 export interface Option {
+  id: string;
   description: string;
-  _id: string;
   isCorrect: boolean;
-}
-export interface MinChallenge {
-  _id: string;
-  title: string;
-  description: string;
-  createdAt: string;
-  difficulty: number;
 }

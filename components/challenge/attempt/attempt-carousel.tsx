@@ -22,7 +22,6 @@ const AttemptCarousel = () => {
     currentQuestionIndex,
   } = useAttemptCarousel();
   const { questions, answers } = useAttempt();
-  console.log({ questions });
   const isCompleted = useMemo(
     () => isQuestionCompleted(questions[currentQuestionIndex], answers),
     [answers, currentQuestionIndex, questions],
@@ -38,7 +37,7 @@ const AttemptCarousel = () => {
       <FlatList
         data={questions}
         renderItem={renderItem}
-        keyExtractor={(item) => item._id}
+        keyExtractor={(item) => item.id}
         scrollEnabled={false}
         horizontal
         pagingEnabled

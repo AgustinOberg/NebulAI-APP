@@ -1,5 +1,4 @@
 import { Feather } from '@expo/vector-icons';
-import { format } from 'date-fns';
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
@@ -7,6 +6,7 @@ import { createStyleSheet, useStyles } from 'react-native-unistyles';
 import Spinner from '@/components/ui/spinner';
 import Text from '@/components/ui/text';
 import type { MinChallenge } from '@/types/challenge';
+import { formatDate } from '@/utils/date.utils';
 interface Props {
   startAttempt: () => void;
   item: MinChallenge;
@@ -21,7 +21,7 @@ const ChallengeListItem = ({ item, startAttempt, isLoading }: Props) => {
           {item.title}
         </Text>
         <Text size={13} weight="300">
-          {`${item.difficulty} ⭐️ - ${format(new Date(item.createdAt), 'dd/MM/yyyy')}`}
+          {`${item.difficulty} ⭐️ - ${formatDate(item.createdAt)}`}
         </Text>
       </View>
       <View style={styles.cardActions}>

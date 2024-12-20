@@ -27,7 +27,7 @@ export const refreshToken = async () => {
 export const getUserProfile = async () => {
   const { data } = await privateApi.get<User>('/auth/profile');
   try {
-    Analytics.identifyUser(data._id, {
+    Analytics.identifyUser(data.id, {
       name: data.name,
       email: data.email,
       avatar: data.picture,

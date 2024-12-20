@@ -3,7 +3,6 @@ export interface Attempt {
   challenge: string;
   score: number;
   answers: string[];
-  _id: string;
-  createdAt: Date;
-  __v: number;
+  id: string;
+  createdAt: number;
 }
