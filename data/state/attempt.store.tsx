@@ -43,17 +43,17 @@ const storeApi: StateCreator<AttemptState, [['zustand/immer', never]]> = (
   setChallenge: (challenge) => {
     set((state) => {
       state.questions = challenge.questions;
-      state.challengeId = challenge._id;
+      state.challengeId = challenge.id;
       state.challenge = challenge;
     });
   },
   completeQuestion: (answerId, question) => {
     set((state) => {
       const alreadyCompleted = question.options.find((o) =>
-        state.answers.includes(o._id),
+        state.answers.includes(o.id),
       );
       if (alreadyCompleted) {
-        state.answers = state.answers.filter((a) => a !== alreadyCompleted._id);
+        state.answers = state.answers.filter((a) => a !== alreadyCompleted.id);
         state.answers.push(answerId);
       } else {
         state.answers.push(answerId);
@@ -63,7 +63,7 @@ const storeApi: StateCreator<AttemptState, [['zustand/immer', never]]> = (
   setMode: ({ mode, challenge, answers }) => {
     set((state) => {
       state.mode = mode;
-      state.challengeId = challenge?._id;
+      state.challengeId = challenge?.id;
       state.questions = challenge?.questions || [];
       if (answers) state.answers = answers;
     });
