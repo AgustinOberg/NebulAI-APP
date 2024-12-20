@@ -42,8 +42,8 @@ const ChallengeAttempts = ({ goBack, challengeId }: Props) => {
 
   const footer = useCallback(() => {
     return (
-      <Button variant="text" onPress={goBack}>
-        Volver
+      <Button variant="text" onPress={goBack} translate>
+        back
       </Button>
     );
   }, [goBack]);

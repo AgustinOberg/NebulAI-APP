@@ -1,6 +1,6 @@
 import { Feather } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import Text from '../ui/text';
@@ -18,9 +18,9 @@ const HeaderWithBack = ({ onBack, title }: HeaderWithBackProps) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <Feather name="arrow-left" size={24} color="white" onPress={goBack} />
-      </View>
+      <Pressable style={styles.iconContainer} onPress={goBack}>
+        <Feather name="arrow-left" size={24} color="white" />
+      </Pressable>
       <View style={styles.iconContainer}>
         <Text weight="700" size={20} align="center" translate>
           {title}
@@ -44,6 +44,7 @@ const stylesheet = createStyleSheet((theme, runtime) => ({
   },
   iconContainer: {
     flex: 1,
+    zIndex: 9999,
   },
   titleText: {
     fontWeight: 'bold',

@@ -61,11 +61,11 @@ const ChallengeInfo = ({ challengeId, viewAttempts }: Props) => {
         <Text>{data.description}</Text>
       </View>
       <View style={styles.footer}>
-        <Button mode="gradient" onPress={tryAgain}>
-          Realizar nuevamente
+        <Button mode="gradient" onPress={tryAgain} translate>
+          tryAgain
         </Button>
-        <Button variant="text" onPress={viewAttempts}>
-          Ver intentos
+        <Button variant="text" onPress={viewAttempts} translate>
+          seeAttempts
         </Button>
       </View>
     </BottomSheetView>

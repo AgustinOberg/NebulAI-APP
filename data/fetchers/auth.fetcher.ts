@@ -2,7 +2,12 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { queryClient } from '@/config/query.config';
 
-import { getUserProfile, googleAuth, refreshToken } from '../api/auth.api';
+import {
+  getUserProfile,
+  googleAuth,
+  refreshToken,
+  setUserPushNotification,
+} from '../api/auth.api';
 import { useUser } from '../state/user.store';
 
 export const useAuthWithGoogle = () => {
@@ -36,5 +41,12 @@ export const useUserProfile = () => {
     enabled: isAuthenticated,
     queryKey: ['user-profile'],
     staleTime: Infinity,
+  });
+};
+
+export const useSetUserPushNotification = () => {
+  return useMutation({
+    mutationFn: setUserPushNotification,
+    retry: 0,
   });
 };

@@ -2,12 +2,15 @@ import { View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 import { useUserProfile } from '@/data/fetchers/auth.fetcher';
+import { useExpoPushNotifications } from '@/hooks/notifications/useExpoPushNotifications';
 
 import Text from '../ui/text';
 
 const HomeInfo = () => {
   const { styles } = useStyles(stylesheet);
   const { data: profile } = useUserProfile();
+  useExpoPushNotifications();
+
   return (
     <View style={styles.container}>
       <Text size={18} weight="900">
