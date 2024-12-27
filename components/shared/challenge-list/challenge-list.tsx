@@ -31,8 +31,8 @@ const ChallengeList = () => {
       return (
         <ChallengeListItem
           item={item}
-          startAttempt={() => present(item._id)}
-          isLoading={isPending && variables === item._id}
+          startAttempt={() => present(item.id)}
+          isLoading={isPending && variables === item.id}
         />
       );
     },
@@ -72,7 +72,7 @@ const ChallengeList = () => {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={header}
         data={data?.data}
-        keyExtractor={(item) => item._id}
+        keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={styles.contentContainer}
         ItemSeparatorComponent={separator}
