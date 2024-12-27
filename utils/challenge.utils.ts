@@ -7,7 +7,7 @@ export const getCorrectAnswers = (
   return questions.reduce((acc, question) => {
     const correctOptionId = question.options.find(
       (option) => option.isCorrect,
-    )?._id;
+    )?.id;
     return correctOptionId && answers.includes(correctOptionId) ? acc + 1 : acc;
   }, 0);
 };
@@ -34,9 +34,9 @@ export const getResults = (questions: Question[], answers: string[]) => {
 
 export const isCorrectAnswer = (question: Question, answer: string) => {
   const correctOption = question.options.find((option) => option.isCorrect);
-  return correctOption?._id === answer;
+  return correctOption?.id === answer;
 };
 
 export const isQuestionCompleted = (question: Question, answers: string[]) => {
-  return question?.options?.some((option) => answers.includes(option._id));
+  return question?.options?.some((option) => answers.includes(option.id));
 };

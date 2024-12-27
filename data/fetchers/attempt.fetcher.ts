@@ -7,13 +7,13 @@ import { getResults } from '@/utils/challenge.utils';
 import { createAttempt, getAttemptByChallengeId } from '../api/attempt.api';
 
 export const useCreateAttempt = () => {
-  const { answers, questions, challengeId } = useAttempt();
+  const { answers, questions, challenge } = useAttempt();
 
   return useMutation({
     mutationFn: () =>
       createAttempt({
         answers: Object.values(answers),
-        challenge: challengeId!,
+        challenge: challenge?.id!,
         score: parseInt(
           getResults(questions, answers).percentage.toString(),
           10,

@@ -1,6 +1,5 @@
 import { Feather } from '@expo/vector-icons';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import { format } from 'date-fns';
 import { useCallback } from 'react';
 import { Platform, Pressable, View } from 'react-native';
 import { createStyleSheet, useStyles } from 'react-native-unistyles';
@@ -10,6 +9,7 @@ import Text from '@/components/ui/text';
 import { useAttemptByChallengeId } from '@/data/fetchers/attempt.fetcher';
 import { useGetChallengeById } from '@/data/fetchers/challenge.fetcher';
 import { useAttempt } from '@/hooks/attempt/useAttempt';
+import { formatDate } from '@/utils/date.utils';
 import { hex2rgba } from '@/utils/ui.utils';
 
 interface Props {
@@ -51,7 +51,7 @@ const ChallengeAttempts = ({ goBack, challengeId }: Props) => {
     <BottomSheetFlatList
       style={styles.container}
       data={attempts}
-      keyExtractor={(item) => item._id}
+      keyExtractor={(item) => item.id}
       ListHeaderComponent={header}
       contentContainerStyle={styles.content}
       ListFooterComponent={footer}
@@ -64,9 +64,7 @@ const ChallengeAttempts = ({ goBack, challengeId }: Props) => {
             <Text weight="800" size={19}>
               {`${item.score}%`}
             </Text>
-            <Text size={14}>
-              {format(new Date(item.createdAt), 'dd/MM/yyyy')}
-            </Text>
+            <Text size={14}>{formatDate(item.createdAt)}</Text>
           </View>
           <Feather name="chevron-right" size={24} color="#FFFFFF" />
         </Pressable>

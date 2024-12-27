@@ -8,13 +8,16 @@ type AttemptCreationBody = {
 };
 
 export const createAttempt = async (body: AttemptCreationBody) => {
+  console.log('Creating attempt...');
+  console.log(JSON.stringify(body, null, 2));
   const { data } = await privateApi.post<Attempt>('/attempt', body);
   return data;
 };
 
 export const getAttemptByChallengeId = async (challengeId: string) => {
   const { data } = await privateApi.get<Attempt[]>(
-    `/attempt/${challengeId}/all`,
+    `/attempt/challenge/${challengeId}`,
   );
+  console.log(JSON.stringify(data));
   return data;
 };
